@@ -346,52 +346,62 @@ tr:hover td {
 }
 
 .user-cell {
-    position: relative;
     font-weight: 600;
 }
 
-.row-remark-tooltip {
-    position: absolute;
-    bottom: 110%;
-    left: 50%;
-    transform: translateX(-50%) translateY(10px);
-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-    border: 1px solid rgba(99, 102, 241, 0.3);
-    border-radius: 12px;
-    padding: 1rem;
-    width: 280px;
+.remark-cell {
     font-family: 'Noto Serif Ethiopic', serif;
     font-size: 0.9rem;
-    color: var(--text-main);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    z-index: 100;
-    pointer-events: none;
-    line-height: 1.4;
+    cursor: pointer;
+    position: relative;
+    max-width: 200px;
+    padding: 0.5rem !important;
     text-align: center;
+    transition: background-color 0.3s;
 }
 
-.row-remark-tooltip::after {
-    content: '';
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    border-width: 8px;
-    border-style: solid;
-    border-color: rgba(99, 102, 241, 0.3) transparent transparent transparent;
+.remark-cell:hover {
+    background: rgba(255, 255, 255, 0.05) !important;
 }
 
-tr:hover .row-remark-tooltip {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) translateY(0);
+.click-hint {
+    color: var(--primary);
+    font-size: 0.8rem;
+    font-family: 'Outfit', sans-serif;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+}
+
+.remark-text {
+    display: none;
+    animation: fadeIn 0.4s ease-out;
+    line-height: 1.4;
+    color: var(--text-main);
+    font-style: italic;
+}
+
+.remark-cell.revealed .click-hint {
+    display: none;
+}
+
+.remark-cell.revealed .remark-text {
+    display: inline-block;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .rank-row:hover td {
-    background: rgba(99, 102, 241, 0.05);
+    background: rgba(99, 102, 241, 0.02);
 }
 
 footer {
