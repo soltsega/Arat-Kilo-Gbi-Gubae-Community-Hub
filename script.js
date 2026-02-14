@@ -92,8 +92,18 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
 
             const remarkCell = row.querySelector('.remark-cell');
-            remarkCell.addEventListener('click', () => {
-                remarkCell.classList.toggle('revealed');
+            remarkCell.addEventListener('click', (e) => {
+                const isAlreadyRevealed = remarkCell.classList.contains('revealed');
+
+                // Close all other remarks
+                document.querySelectorAll('.remark-cell.revealed').forEach(cell => {
+                    cell.classList.remove('revealed');
+                });
+
+                // Toggle current remark only if it wasn't already revealed
+                if (!isAlreadyRevealed) {
+                    remarkCell.classList.add('revealed');
+                }
             });
 
             tableBody.appendChild(row);
