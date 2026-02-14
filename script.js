@@ -57,10 +57,14 @@ document.addEventListener('DOMContentLoaded', () => {
                     ${user.Quizzes_Participated} Quizzes | ${parseFloat(user.Avg_Points).toFixed(1)} Acc
                 </div>
                 <div class="blessing-overlay">
-                    <p class="blessing-text">
-                        እንኳን ደስ አለህ/አለሽ! <br>
-                        እግዚአብሔር ያክብርልን፤ በቤቱ ያጽናልን። በዕውቀት ላይ ዕውቀት፣ በጸጋ ላይ ጸጋ ይጨምርልህ/ሽ።
-                    </p>
+                    <div class="blessing-content">
+                        <span class="sparkle">✨</span>
+                        <p class="blessing-text">
+                            እንኳን ደስ አለህ/አለሽ! <br>
+                            እግዚአብሔር ያክብርልን፤ በቤቱ ያጽናልን። በዕውቀት ላይ ዕውቀት፣ በጸጋ ላይ ጸጋ ይጨምርልህ/ሽ።
+                        </p>
+                        <span class="sparkle">✨</span>
+                    </div>
                 </div>
             `;
             podiumContainer.appendChild(card);
