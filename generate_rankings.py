@@ -82,11 +82,11 @@ def generate_rankings(input_file):
     else:
         agg_df['Accuracy_Score'] = 0.0
 
-    # 25% Speed (Min Avg Time / User Avg Time) * 25
+    # 25% Speed: 25 pts for <50s, otherwise (50 / User Avg Time) * 25
     def calculate_speed_score(row):
-        if row['Avg_Time'] > 0:
-            return (min_avg_time / row['Avg_Time']) * 25
-        return 0.0
+        if row['Avg_Time'] <= 50:
+            return 25.0
+        return (50 / row['Avg_Time']) * 25
 
     agg_df['Speed_Score'] = agg_df.apply(calculate_speed_score, axis=1)
     
