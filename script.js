@@ -82,6 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td class="hide-mobile">${parseFloat(user.Avg_Points).toFixed(2)}</td>
                 <td class="hide-mobile">${parseFloat(user.Avg_Time).toFixed(1)}s</td>
                 <td class="score-cell">${parseFloat(user.Final_Score).toFixed(2)}</td>
+                <td class="remark-cell">${user.Remark}</td>
             `;
             tableBody.appendChild(row);
         });

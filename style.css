@@ -342,6 +342,15 @@ tr:hover td {
     color: var(--accent);
 }
 
+.remark-cell {
+    font-family: 'Noto Serif Ethiopic', serif;
+    font-size: 0.95rem;
+    color: var(--text-dim);
+    line-height: 1.4;
+    min-width: 200px;
+    font-style: italic;
+}
+
 footer {
     text-align: center;
     padding: 4rem 0;

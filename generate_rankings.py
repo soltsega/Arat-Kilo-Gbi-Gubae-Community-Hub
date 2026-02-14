@@ -109,9 +109,20 @@ def generate_rankings(input_file):
     # Final Rank assignment
     agg_df['Rank'] = range(1, len(agg_df) + 1)
     
+    # Assign Remarks based on Final_Score
+    def get_remark(score):
+        if score >= 40:
+            return "እግዚአብሔር ያክብራችሁ በርቱ🥰"
+        elif 20 <= score < 40:
+            return "እንዴ በርቱ እንጂ አሁን F ላይ ናችሁ፤ በቀጣይ NG ነው የሚሆነው🤭"
+        else:
+            return "እናንተማ እያውደለደላችሁ ነው፤ \"ሥራህን አውቃለሁ፤ በራድ ወይም ትኩስ እንዳልሆንህ፤ በራድ ወይም ትኩስ ብትሆንስ መልካም በሆነ ነበር። እንዲሁ ለዘብተኛ ስለሆንህ በራድም ወይም ትኩስ ስላልሆንህ ከአፌ ልተፋህ ነው።\" የተባለው ለናንተ ነው የሚመስለው😂"
+
+    agg_df['Remark'] = agg_df['Final_Score'].apply(get_remark)
+
     # Reorder columns for output
     final_output = agg_df[[
-        'Rank', 'Username', 'Quizzes_Participated', 'Avg_Points', 'Avg_Time', 'Final_Score'
+        'Rank', 'Username', 'Quizzes_Participated', 'Avg_Points', 'Avg_Time', 'Final_Score', 'Remark'
     ]]
     
     # Save CSV
@@ -123,10 +134,10 @@ def generate_rankings(input_file):
     md_path = os.path.join("documentation", "CumulativeLeaderboard.md")
     with open(md_path, 'w', encoding='utf-8') as md:
         md.write("# 🏆 Cumulative Quiz Leaderboard\n\n")
-        md.write("| Rank | Username | Quizzes | Avg Accuracy | Avg Time (s) | Final Score |\n")
-        md.write("| :--- | :--- | :--- | :--- | :--- | :--- |\n")
+        md.write("| Rank | Username | Quizzes | Avg Accuracy | Avg Time (s) | Final Score | Remark |\n")
+        md.write("| :--- | :--- | :--- | :--- | :--- | :--- | :--- |\n")
         for _, row in final_output.iterrows():
-            md.write(f"| {int(row['Rank'])} | {row['Username']} | {int(row['Quizzes_Participated'])} | {row['Avg_Points']:.2f} | {row['Avg_Time']:.2f} | {row['Final_Score']:.2f} |\n")
+            md.write(f"| {int(row['Rank'])} | {row['Username']} | {int(row['Quizzes_Participated'])} | {row['Avg_Points']:.2f} | {row['Avg_Time']:.2f} | {row['Final_Score']:.2f} | {row['Remark']} |\n")
     
     print(f"Markdown report generated at {md_path}")
 
