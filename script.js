@@ -48,11 +48,19 @@ document.addEventListener('DOMContentLoaded', () => {
             card.className = `podium-card ${classes[index]}`;
             card.innerHTML = `
                 <span class="rank-icon">${icons[index]}</span>
-                <h3>${user.Username}</h3>
+                <div class="user-name-wrapper">
+                    <h3>${user.Username}</h3>
+                </div>
                 <div class="score">${parseFloat(user.Final_Score).toFixed(1)}</div>
                 <div class="label">Points</div>
-                <div class="stats-mini" style="margin-top: 1rem; font-size: 0.8rem; color: #94a3b8;">
+                <div class="stats-mini">
                     ${user.Quizzes_Participated} Quizzes | ${parseFloat(user.Avg_Points).toFixed(1)} Acc
+                </div>
+                <div class="blessing-overlay">
+                    <p class="blessing-text">
+                        እንኳን ደስ አለህ/አለሽ! <br>
+                        እግዚአብሔር ያክብርልን፤ በቤቱ ያጽናልን። በዕውቀት ላይ ዕውቀት፣ በጸጋ ላይ ጸጋ ይጨምርልህ/ሽ።
+                    </p>
                 </div>
             `;
             podiumContainer.appendChild(card);

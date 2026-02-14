@@ -62,8 +62,13 @@ body {
 }
 
 @keyframes float {
-    from { transform: translate(0, 0); }
-    to { transform: translate(100px, 50px); }
+    from {
+        transform: translate(0, 0);
+    }
+
+    to {
+        transform: translate(100px, 50px);
+    }
 }
 
 .container {
@@ -125,18 +130,74 @@ h1 {
     display: block;
 }
 
-.podium-card.first { 
-    height: 380px; 
+.podium-card.first {
+    height: 380px;
     border-color: rgba(251, 191, 36, 0.4);
     box-shadow: 0 0 30px rgba(251, 191, 36, 0.1);
 }
-.podium-card.second { height: 320px; }
-.podium-card.third { height: 280px; }
 
-.podium-card h3 {
-    font-size: 1.5rem;
+.podium-card.second {
+    height: 320px;
+}
+
+.podium-card.third {
+    height: 280px;
+}
+
+.user-name-wrapper h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
     margin-bottom: 0.5rem;
     word-break: break-all;
+    background: linear-gradient(135deg, #fff 0%, var(--primary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 0 5px rgba(99, 102, 241, 0.3));
+}
+
+.stats-mini {
+    margin-top: 1rem;
+    font-size: 0.8rem;
+    color: var(--text-dim);
+}
+
+/* Blessing Overlay Styles */
+.podium-card {
+    position: relative;
+    overflow: hidden;
+    /* Contain the overlay */
+}
+
+.blessing-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: translateY(20px);
+    z-index: 10;
+}
+
+.podium-card:hover .blessing-overlay {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.blessing-text {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-main);
+    font-weight: 500;
+    text-shadow: 0 0 10px rgba(99, 102, 241, 0.5);
 }
 
 .podium-card .score {
@@ -247,9 +308,25 @@ footer {
 
 /* Responsive */
 @media (max-width: 768px) {
-    h1 { font-size: 2.5rem; }
-    .podium-container { flex-direction: column; align-items: center; }
-    .podium-card { width: 100%; height: auto !important; }
-    .hide-mobile { display: none; }
-    .search-box input { width: 100%; }
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    .podium-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .podium-card {
+        width: 100%;
+        height: auto !important;
+    }
+
+    .hide-mobile {
+        display: none;
+    }
+
+    .search-box input {
+        width: 100%;
+    }
 }
