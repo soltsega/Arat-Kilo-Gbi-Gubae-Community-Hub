@@ -1,14 +1,19 @@
 :root {
-    --primary: #6366f1;
-    --secondary: #ec4899;
+    --primary: #c19b4a;
+    /* Golden tone for Arat Kilo Gibi Gubae */
+    --primary-light: #dfc17b;
+    --secondary: #064e3b;
+    /* Deep green for background flavor */
     --accent: #10b981;
-    --bg-dark: #0f172a;
-    --card-bg: rgba(30, 41, 59, 0.7);
+    --bg-dark: #022c22;
+    /* Very deep green/dark theme */
+    --card-bg: rgba(6, 78, 59, 0.4);
     --text-main: #f8fafc;
     --text-dim: #94a3b8;
     --gold: #fbbf24;
     --silver: #94a3b8;
     --bronze: #b45309;
+    --nav-height: 80px;
 }
 
 * {
@@ -77,9 +82,71 @@ body {
     padding: 2rem;
 }
 
+/* Navigation Styles */
+nav {
+    height: var(--nav-height);
+    background: rgba(2, 44, 34, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(193, 155, 74, 0.2);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+}
+
+nav .container {
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logo-link {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    text-decoration: none;
+    color: var(--text-main);
+}
+
+.logo-img {
+    height: 50px;
+    width: 50px;
+    object-fit: contain;
+    border-radius: 50%;
+    /* border: 2px solid var(--primary); */
+}
+
+.brand-name {
+    font-weight: 700;
+    font-size: 1.2rem;
+    letter-spacing: 0.5px;
+}
+
+.nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--text-dim);
+    font-weight: 500;
+    transition: color 0.3s, transform 0.3s;
+    font-size: 0.95rem;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: var(--primary);
+}
+
 header {
     text-align: center;
-    padding: 4rem 0 2rem;
+    padding: 2rem 0;
 }
 
 h1 {
@@ -404,9 +471,68 @@ tr:hover td {
     background: rgba(99, 102, 241, 0.02);
 }
 
+/* Landing Page Specifics */
+.hero {
+    padding: 4rem 0;
+    text-align: center;
+}
+
+.hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    color: var(--text-dim);
+    max-width: 700px;
+    margin: 0 auto 2rem;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+}
+
+.feature-card {
+    background: var(--card-bg);
+    padding: 2rem;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s;
+    text-decoration: none;
+    color: inherit;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary);
+}
+
+.feature-card i {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+    display: block;
+}
+
+.feature-card h3 {
+    margin-bottom: 1rem;
+}
+
+.feature-card p {
+    color: var(--text-dim);
+    font-size: 0.9rem;
+}
+
 footer {
     text-align: center;
     padding: 4rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+    margin-top: 4rem;
     color: var(--text-dim);
     font-size: 0.9rem;
 }
