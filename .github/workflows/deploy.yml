@@ -20,13 +20,8 @@ jobs:
           mkdir deploy
           cp -r assets deploy/
           cp -r data deploy/
-          cp public/* deploy/
-          # Ensure paths are correct in the deployed index.html
-          # We need to remove the '../' from paths since everything is now at repo root on gh-pages
-          sed -i 's|src="../assets/|src="assets/|g' deploy/*.html
-          sed -i 's|href="../assets/|href="assets/|g' deploy/*.html
-          # Also fix script.js fallback path in the deployed version
-          sed -i "s|'../data/|'data/|g" deploy/assets/js/script.js
+          cp *.html deploy/
+          # No path fixing needed because we are deploying from root!
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
