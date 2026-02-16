@@ -5,3 +5,7 @@ __pycache__/
 .DS_Store
 .env
 additional.txt
+venv/
+ideas/draft.txt
+docs/CumulativeLeaderboard.md
+docs/Idea.md

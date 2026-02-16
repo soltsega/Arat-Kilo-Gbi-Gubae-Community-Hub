@@ -5,45 +5,56 @@ document.addEventListener('DOMContentLoaded', () => {
     let leaderboardData = [];
 
     async function fetchData() {
+        if (!podiumContainer && !tableBody) return;
+
+        // Fetch directly from CSV as requested
+        const CSV_URL = 'data/cumulative_leaderboard.csv';
+
         try {
-            // Using a relative path to the csv
-            const response = await fetch('data/cumulative_leaderboard.csv');
-            const data = await response.text();
-            parseCSV(data);
+            console.log('Attempting to fetch from CSV...');
+            const response = await fetch(CSV_URL);
+            if (!response.ok) throw new Error('CSV file not found');
+            const csvText = await response.text();
+            parseCSV(csvText);
+            console.log('Data loaded from CSV');
         } catch (error) {
-            console.error('Error fetching data:', error);
-            podiumContainer.innerHTML = '<div class="error">Failed to load data. Make sure cumulative_leaderboard.csv exists.</div>';
+            console.error('Data source failed:', error);
+            if (podiumContainer) {
+                podiumContainer.innerHTML = '<div class="error">Unable to load leaderboard data.</div>';
+            }
         }
     }
 
     function parseCSV(csvText) {
         const lines = csvText.trim().split('\n');
+        if (lines.length === 0) return;
+
         const headers = lines[0].split(',');
 
         leaderboardData = lines.slice(1).map(line => {
             const values = line.split(',');
             const entry = {};
             headers.forEach((header, i) => {
-                entry[header.trim()] = values[i].trim();
+                entry[header.trim()] = values[i] ? values[i].trim() : '';
             });
             return entry;
         });
 
-        renderPodium(leaderboardData.slice(0, 3));
-        renderTable(leaderboardData);
+        if (podiumContainer) renderPodium(leaderboardData.slice(0, 3));
+        if (tableBody) renderTable(leaderboardData);
     }
 
     function renderPodium(topThree) {
+        if (!podiumContainer) return;
         podiumContainer.innerHTML = '';
 
-        // Reorder for visual podium: 2, 1, 3
+        // Podium visual order: 2nd, 1st, 3rd
         const visualOrder = [topThree[1], topThree[0], topThree[2]];
         const classes = ['second', 'first', 'third'];
         const icons = ['🥈', '🥇', '🥉'];
 
         visualOrder.forEach((user, index) => {
             if (!user) return;
-
             const card = document.createElement('div');
             card.className = `podium-card ${classes[index]}`;
             card.innerHTML = `
@@ -72,6 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderTable(data) {
+        if (!tableBody) return;
         tableBody.innerHTML = '';
         data.forEach(user => {
             const row = document.createElement('tr');
@@ -82,25 +94,21 @@ document.addEventListener('DOMContentLoaded', () => {
                     ${user.Username}
                 </td>
                 <td class="hide-mobile">${user.Quizzes_Participated}</td>
-                <td class="hide-mobile">${parseFloat(user.Avg_Points).toFixed(2)}</td>
-                <td class="hide-mobile">${parseFloat(user.Avg_Time).toFixed(1)}s</td>
-                <td class="score-cell">${parseFloat(user.Final_Score).toFixed(2)}</td>
+                <td class="hide-mobile">${parseFloat(user.Avg_Points || 0).toFixed(2)}</td>
+                <td class="hide-mobile">${parseFloat(user.Avg_Time || 0).toFixed(1)}s</td>
+                <td class="score-cell">${parseFloat(user.Final_Score || 0).toFixed(2)}</td>
                 <td class="remark-cell">
                     <span class="click-hint">Click to see...</span>
-                    <span class="remark-text">${user.Remark}</span>
+                    <span class="remark-text">${user.Remark || ''}</span>
                 </td>
             `;
 
             const remarkCell = row.querySelector('.remark-cell');
             remarkCell.addEventListener('click', (e) => {
                 const isAlreadyRevealed = remarkCell.classList.contains('revealed');
-
-                // Close all other remarks
                 document.querySelectorAll('.remark-cell.revealed').forEach(cell => {
                     cell.classList.remove('revealed');
                 });
-
-                // Toggle current remark only if it wasn't already revealed
                 if (!isAlreadyRevealed) {
                     remarkCell.classList.add('revealed');
                 }
@@ -110,14 +118,16 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    searchInput.addEventListener('input', (e) => {
-        const term = e.target.value.toLowerCase();
-        const filtered = leaderboardData.filter(user =>
-            user.Username.toLowerCase().includes(term) ||
-            user.Rank.includes(term)
-        );
-        renderTable(filtered);
-    });
+    if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
+            const filtered = leaderboardData.filter(user =>
+                user.Username.toLowerCase().includes(term) ||
+                user.Rank.toString().includes(term)
+            );
+            renderTable(filtered);
+        });
+    }
 
     fetchData();
 });
