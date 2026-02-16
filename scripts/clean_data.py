@@ -119,7 +119,7 @@ def clean_quiz_data(file_path):
 if __name__ == "__main__":
     # Use relative path from the script's location
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    file_path = os.path.join(script_dir, 'data', 'quizRankData.txt')
+    file_path = os.path.join(script_dir, '..', 'data', 'quizRankData.txt')
     
     # Allow overriding via command line argument
     if len(sys.argv) > 1:

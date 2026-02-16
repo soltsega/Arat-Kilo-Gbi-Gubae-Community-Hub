@@ -126,12 +126,13 @@ def generate_rankings(input_file):
     ]]
     
     # Save CSV
-    csv_path = os.path.join("data", "cumulative_leaderboard.csv")
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    csv_path = os.path.join(script_dir, "..", "data", "cumulative_leaderboard.csv")
     final_output.to_csv(csv_path, index=False)
     print(f"Leaderboard saved to {csv_path}")
     
     # Save Markdown
-    md_path = os.path.join("documentation", "CumulativeLeaderboard.md")
+    md_path = os.path.join(script_dir, "..", "docs", "CumulativeLeaderboard.md")
     with open(md_path, 'w', encoding='utf-8') as md:
         md.write("# 🏆 Cumulative Quiz Leaderboard\n\n")
         md.write("| Rank | Username | Quizzes | Avg Accuracy | Avg Time (s) | Final Score | Remark |\n")
@@ -142,5 +143,6 @@ def generate_rankings(input_file):
     print(f"Markdown report generated at {md_path}")
 
 if __name__ == "__main__":
-    data_file = os.path.join("data", "quizRankData.txt")
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    data_file = os.path.join(script_dir, "..", "data", "quizRankData.txt")
     generate_rankings(data_file)

@@ -15,7 +15,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-DATA_FILE = os.path.join("data", "quizRankData.txt")
+DATA_FILE = os.path.join(os.path.dirname(__file__), "..", "data", "quizRankData.txt")
 
 def parse_time_to_seconds(time_str):
     time_str = time_str.lower().strip()
