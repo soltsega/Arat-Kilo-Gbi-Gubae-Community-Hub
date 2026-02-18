@@ -1,13 +1,29 @@
-__pycache__/
-*.py[cod]
-*$py.class
-*.bak
-.DS_Store
-.env
-additional.txt
+# Environments
+venv/
+.venv/
+env/
+/bin/
+/include/
+/lib/
+/share/
+pyvenv.cfg
+pip-selfcheck.json
+
+# IDEs
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Project specific
+status.txt
+cumulative_data.txt
 venv/
 ideas/draft.txt
 docs/CumulativeLeaderboard.md
 docs/Idea.md
 googleTag.html
 cumulative_data.txt
+status.txt
+docs/additional.txt
+data/quizRankData.txt.bak
