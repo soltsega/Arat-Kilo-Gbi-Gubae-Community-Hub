@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Mobile detection
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    
+
     // Show loading state
     function showLoading(element, message = 'Loading...') {
         if (element) {
@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         successDiv.className = 'success';
         successDiv.textContent = message;
         document.body.appendChild(successDiv);
-        
+
         setTimeout(() => {
             successDiv.remove();
         }, 3000);
@@ -48,30 +48,30 @@ document.addEventListener('DOMContentLoaded', () => {
     // Pull-to-refresh functionality
     function initPullToRefresh() {
         if (!isMobile) return;
-        
+
         const pullToRefresh = document.createElement('div');
         pullToRefresh.className = 'pull-to-refresh';
         pullToRefresh.innerHTML = '🔄 Pull to refresh';
         document.body.appendChild(pullToRefresh);
-        
+
         let touchStartY = 0;
-        
+
         document.addEventListener('touchstart', (e) => {
             if (window.scrollY === 0) {
                 touchStartY = e.touches[0].clientY;
                 isRefreshing = false;
             }
         }, { passive: true });
-        
+
         document.addEventListener('touchmove', (e) => {
             if (window.scrollY === 0 && touchStartY > 0) {
                 currentY = e.touches[0].clientY;
                 pullDistance = currentY - touchStartY;
-                
+
                 if (pullDistance > 0 && pullDistance < 150) {
                     e.preventDefault();
                     pullToRefresh.style.transform = `translateY(${Math.min(pullDistance - 60, 0)}px)`;
-                    
+
                     if (pullDistance > 100) {
                         pullToRefresh.innerHTML = '🔄 Release to refresh';
                         pullToRefresh.classList.add('show');
@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         }, { passive: false });
-        
+
         document.addEventListener('touchend', () => {
             if (pullDistance > 100 && !isRefreshing) {
                 isRefreshing = true;
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 hapticFeedback();
                 fetchData();
             }
-            
+
             setTimeout(() => {
                 pullToRefresh.style.transform = 'translateY(-60px)';
                 pullToRefresh.classList.remove('show');
@@ -103,18 +103,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mobile menu functionality
     function initMobileMenu() {
         if (!isMobile) return;
-        
+
         const nav = document.querySelector('nav');
         const mobileMenuBtn = document.createElement('button');
         mobileMenuBtn.className = 'mobile-menu-btn';
         mobileMenuBtn.innerHTML = '<span></span><span></span><span></span>';
         nav.appendChild(mobileMenuBtn);
-        
+
         mobileMenuBtn.addEventListener('click', () => {
             mobileMenuBtn.classList.toggle('active');
             hapticFeedback();
         });
-        
+
         // Close menu when clicking outside
         document.addEventListener('click', (e) => {
             if (!nav.contains(e.target)) {
@@ -126,13 +126,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add touch interactions to cards
     function addTouchInteractions() {
         const cards = document.querySelectorAll('.feature-card, .podium-card, .gospel-card');
-        
+
         cards.forEach(card => {
             card.addEventListener('touchstart', () => {
                 card.style.transform = 'scale(0.98)';
                 hapticFeedback();
             }, { passive: true });
-            
+
             card.addEventListener('touchend', () => {
                 setTimeout(() => {
                     card.style.transform = '';
@@ -144,7 +144,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Smooth scroll for mobile
     function initSmoothScroll() {
         if (!isMobile) return;
-        
+
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -162,13 +162,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Enhanced search with mobile keyboard handling
     function initEnhancedSearch() {
         if (!searchInput) return;
-        
+
         // Add mobile keyboard optimizations
         searchInput.setAttribute('autocomplete', 'off');
         searchInput.setAttribute('autocorrect', 'off');
         searchInput.setAttribute('autocapitalize', 'off');
         searchInput.setAttribute('spellcheck', 'false');
-        
+
         // Add clear button
         const clearBtn = document.createElement('button');
         clearBtn.innerHTML = '✕';
@@ -185,16 +185,16 @@ document.addEventListener('DOMContentLoaded', () => {
             padding: 0.5rem;
             display: none;
         `;
-        
+
         const searchBox = searchInput.parentElement;
         searchBox.style.position = 'relative';
         searchBox.appendChild(clearBtn);
-        
+
         // Show/hide clear button
         searchInput.addEventListener('input', () => {
             clearBtn.style.display = searchInput.value ? 'block' : 'none';
         });
-        
+
         // Clear functionality
         clearBtn.addEventListener('click', () => {
             searchInput.value = '';
@@ -269,7 +269,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             const headers = lines[0].split(',').map(h => h.trim());
-            
+
             leaderboardData = lines.slice(1)
                 .filter(line => line.trim())
                 .map(line => {
@@ -283,10 +283,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 .filter(entry => entry.Username && entry.Rank); // Filter out empty entries
 
             originalData = [...leaderboardData];
-            
+
             if (podiumContainer) renderPodium(leaderboardData.slice(0, 3));
             if (tableBody) renderTable(leaderboardData);
-            
+
             console.log(`Parsed ${leaderboardData.length} entries from CSV`);
         } catch (error) {
             console.error('Error parsing CSV:', error);
@@ -395,15 +395,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Search functionality with debouncing
     function performSearch() {
         const searchTerm = searchInput.value.toLowerCase().trim();
-        
+
         if (!searchTerm) {
             leaderboardData = [...originalData];
         } else {
-            leaderboardData = originalData.filter(user => 
+            leaderboardData = originalData.filter(user =>
                 user.Username && user.Username.toLowerCase().includes(searchTerm)
             );
         }
-        
+
         if (podiumContainer) renderPodium(leaderboardData.slice(0, 3));
         if (tableBody) renderTable(leaderboardData);
     }
@@ -412,7 +412,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (searchInput) {
         const debouncedSearch = debounce(performSearch, 300);
         searchInput.addEventListener('input', debouncedSearch);
-        
+
         // Add clear button functionality
         searchInput.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
@@ -426,22 +426,25 @@ document.addEventListener('DOMContentLoaded', () => {
     function initThemeToggle() {
         const themeToggle = document.createElement('button');
         themeToggle.className = 'theme-toggle';
-        themeToggle.innerHTML = `
-            <span class="icon sun">☀️</span>
-            <span class="icon moon">🌙</span>
-        `;
         themeToggle.setAttribute('aria-label', 'Toggle theme');
-        themeToggle.setAttribute('title', 'Toggle between light and dark mode');
-        
+        themeToggle.setAttribute('title', 'Switch between light and dark mode');
+
+        // Use SVG icons for a more professional look
+        themeToggle.innerHTML = `
+            <svg class="icon sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+            <svg class="icon moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+        `;
+
         document.body.appendChild(themeToggle);
-        
+
         // Load saved theme or detect system preference
         const savedTheme = localStorage.getItem('theme');
         const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
-        
+        // Default to dark mode for "professional" feel if no preference
+        const initialTheme = savedTheme || (systemPrefersDark ? 'dark' : 'dark');
+
         setTheme(initialTheme);
-        
+
         // Theme toggle event
         themeToggle.addEventListener('click', () => {
             const currentTheme = document.body.getAttribute('data-theme');
@@ -449,7 +452,7 @@ document.addEventListener('DOMContentLoaded', () => {
             setTheme(newTheme);
             hapticFeedback();
         });
-        
+
         // Listen for system theme changes
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
             if (!localStorage.getItem('theme')) {
@@ -457,17 +460,17 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
-    
+
     function setTheme(theme) {
         document.body.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
-        
+
         // Update meta theme-color
         const metaTheme = document.querySelector('meta[name="theme-color"]');
         if (metaTheme) {
             metaTheme.content = theme === 'dark' ? '#022c22' : '#c19b4a';
         }
-        
+
         // Show animation
         const themeToggle = document.querySelector('.theme-toggle');
         if (themeToggle) {
@@ -485,7 +488,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initSmoothScroll();
     initEnhancedSearch();
     initThemeToggle();
-    
+
     // Add page visibility API for better performance
     document.addEventListener('visibilitychange', () => {
         if (!document.hidden && isMobile) {
@@ -493,7 +496,7 @@ document.addEventListener('DOMContentLoaded', () => {
             fetchData();
         }
     });
-    
+
     // Add online/offline detection
     function updateOnlineStatus() {
         if (navigator.onLine) {
@@ -503,10 +506,10 @@ document.addEventListener('DOMContentLoaded', () => {
             showError(podiumContainer, 'You are offline. Some features may not work.');
         }
     }
-    
+
     window.addEventListener('online', updateOnlineStatus);
     window.addEventListener('offline', updateOnlineStatus);
-    
+
     // Initialize with data fetch
     fetchData();
 });
