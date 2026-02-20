@@ -836,27 +836,28 @@ footer {
     .mobile-menu-btn {
         display: flex !important;
         position: absolute !important;
-        top: 1.25rem !important;
+        top: 50% !important;
         right: 1.5rem !important;
+        transform: translateY(-50%) !important;
         bottom: auto !important;
         left: auto !important;
         z-index: 1005 !important;
-        background: rgba(193, 155, 74, 0.15) !important;
-        border: 1px solid rgba(193, 155, 74, 0.3) !important;
+        background: rgba(193, 155, 74, 0.1) !important;
+        border: 1px solid rgba(193, 155, 74, 0.2) !important;
         border-radius: 12px !important;
-        width: 48px !important;
-        height: 48px !important;
+        width: 44px !important;
+        height: 44px !important;
         flex-direction: column !important;
         justify-content: center !important;
         align-items: center !important;
         cursor: pointer !important;
         backdrop-filter: blur(10px) !important;
-        transition: all 0.3s ease !important;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
     }
 
     .mobile-menu-btn:active {
-        background: rgba(193, 155, 74, 0.3) !important;
-        transform: scale(0.95);
+        background: rgba(193, 155, 74, 0.2) !important;
+        transform: translateY(-50%) scale(0.9) !important;
     }
 
     .mobile-menu-btn span {

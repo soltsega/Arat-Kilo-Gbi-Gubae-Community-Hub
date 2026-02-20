@@ -193,12 +193,10 @@ document.addEventListener('DOMContentLoaded', () => {
         showLoading(tableBody, 'Loading leaderboard data...');
 
         try {
-            console.log('Fetching leaderboard from CSV...');
             const response = await fetch(CSV_URL);
             if (!response.ok) throw new Error('CSV file not found');
             const csvText = await response.text();
             parseCSV(csvText);
-            console.log('Data loaded successfully from CSV');
         } catch (error) {
             console.error('Leaderboard load failed:', error);
             showError(podiumContainer, 'Unable to load leaderboard data. Please check if data/cumulative_leaderboard.csv exists.');
@@ -233,8 +231,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (podiumContainer) renderPodium(leaderboardData.slice(0, 3));
             if (tableBody) renderTable(leaderboardData);
-
-            console.log(`Parsed ${leaderboardData.length} entries from CSV`);
         } catch (error) {
             console.error('Error parsing CSV:', error);
             showError(podiumContainer, 'Error parsing data file');
