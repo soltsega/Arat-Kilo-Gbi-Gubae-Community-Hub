@@ -4,10 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
     let leaderboardData = [];
     let originalData = [];
-    let isRefreshing = false;
-    let startY = 0;
-    let currentY = 0;
-    let pullDistance = 0;
 
     // Mobile detection
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -45,70 +41,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Pull-to-refresh functionality
-    function initPullToRefresh() {
-        if (!isMobile) return;
-
-        const pullToRefresh = document.createElement('div');
-        pullToRefresh.className = 'pull-to-refresh';
-        pullToRefresh.innerHTML = '🔄 Pull to refresh';
-        document.body.appendChild(pullToRefresh);
-
-        let touchStartY = 0;
-
-        document.addEventListener('touchstart', (e) => {
-            if (window.scrollY === 0) {
-                touchStartY = e.touches[0].clientY;
-                isRefreshing = false;
-            }
-        }, { passive: true });
-
-        document.addEventListener('touchmove', (e) => {
-            if (window.scrollY === 0 && touchStartY > 0) {
-                currentY = e.touches[0].clientY;
-                pullDistance = currentY - touchStartY;
-
-                if (pullDistance > 0 && pullDistance < 150) {
-                    e.preventDefault();
-                    pullToRefresh.style.transform = `translateY(${Math.min(pullDistance - 60, 0)}px)`;
-
-                    if (pullDistance > 100) {
-                        pullToRefresh.innerHTML = '🔄 Release to refresh';
-                        pullToRefresh.classList.add('show');
-                    } else {
-                        pullToRefresh.innerHTML = '🔄 Pull to refresh';
-                        pullToRefresh.classList.remove('show');
-                    }
-                }
-            }
-        }, { passive: false });
-
-        document.addEventListener('touchend', () => {
-            if (pullDistance > 100 && !isRefreshing) {
-                isRefreshing = true;
-                pullToRefresh.innerHTML = '🔄 Refreshing...';
-                hapticFeedback();
-                fetchData();
-            }
-
-            setTimeout(() => {
-                pullToRefresh.style.transform = 'translateY(-60px)';
-                pullToRefresh.classList.remove('show');
-                pullDistance = 0;
-                isRefreshing = false;
-            }, 300);
-        }, { passive: true });
-    }
 
     function initMobileMenu() {
-        if (!isMobile) return;
+        if (!isMobile || document.querySelector('.mobile-menu-btn')) return;
 
         const nav = document.querySelector('nav');
         const navLinks = document.querySelector('.nav-links');
         const mobileMenuBtn = document.createElement('button');
         mobileMenuBtn.className = 'mobile-menu-btn';
         mobileMenuBtn.innerHTML = '<span></span><span></span><span></span>';
-        document.body.appendChild(mobileMenuBtn);
+
+        // Find logo link to insert button after or just append to nav container
+        const navContainer = document.querySelector('nav .container');
+        if (navContainer) {
+            navContainer.appendChild(mobileMenuBtn);
+        } else {
+            document.body.appendChild(mobileMenuBtn);
+        }
 
         mobileMenuBtn.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -480,20 +429,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Initialize mobile features
-    initPullToRefresh();
     initMobileMenu();
     addTouchInteractions();
     initSmoothScroll();
     initEnhancedSearch();
     initThemeToggle();
 
-    // Add page visibility API for better performance
-    document.addEventListener('visibilitychange', () => {
-        if (!document.hidden && isMobile) {
-            // Refresh data when page becomes visible
-            fetchData();
-        }
-    });
 
     // Add online/offline detection
     function updateOnlineStatus() {

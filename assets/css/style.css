@@ -832,45 +832,58 @@ footer {
         -webkit-text-fill-color: transparent;
     }
 
-    .feature-card i,
-    .gospel-card i,
-    .podium-card,
-    .tab-content,
-    .podium-icon,
-    .rank-icon {
-        animation: none !important;
-        transform: none !important;
-        transition: none !important;
-    }
-
-    /* Mobile Menu FAB (Floating Action Button) - FORCE AT BOTTOM RIGHT */
+    /* Mobile Menu - Professional Top-Right Position */
     .mobile-menu-btn {
         display: flex !important;
-        position: fixed !important;
-        bottom: 2.5rem !important;
+        position: absolute !important;
+        top: 1.25rem !important;
         right: 1.5rem !important;
-        top: auto !important;
+        bottom: auto !important;
         left: auto !important;
         z-index: 1005 !important;
-        background: var(--primary) !important;
-        border: none !important;
-        border-radius: 50% !important;
-        width: 65px !important;
-        height: 65px !important;
+        background: rgba(193, 155, 74, 0.15) !important;
+        border: 1px solid rgba(193, 155, 74, 0.3) !important;
+        border-radius: 12px !important;
+        width: 48px !important;
+        height: 48px !important;
         flex-direction: column !important;
         justify-content: center !important;
         align-items: center !important;
         cursor: pointer !important;
-        box-shadow: 0 10px 30px rgba(193, 155, 74, 0.5) !important;
+        backdrop-filter: blur(10px) !important;
+        transition: all 0.3s ease !important;
+    }
+
+    .mobile-menu-btn:active {
+        background: rgba(193, 155, 74, 0.3) !important;
+        transform: scale(0.95);
     }
 
     .mobile-menu-btn span {
         display: block !important;
-        width: 28px !important;
-        height: 3px !important;
-        background: white !important;
+        width: 24px !important;
+        height: 2px !important;
+        background: var(--primary) !important;
         margin: 3px 0 !important;
         border-radius: 2px !important;
+        transition: all 0.3s ease !important;
+    }
+
+    /* Active state for hamburger animation */
+    .mobile-menu-btn.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px) !important;
+    }
+
+    .mobile-menu-btn.active span:nth-child(2) {
+        opacity: 0 !important;
+    }
+
+    .mobile-menu-btn.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -7px) !important;
+    }
+
+    nav {
+        position: relative !important;
     }
 }
 
@@ -918,10 +931,6 @@ footer {
 
     .brand-name {
         font-size: 0.8rem;
-    }
-
-    .nav-links {
-        /* Already handled in 768px media query */
     }
 
     .podium-card {
