@@ -410,7 +410,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         document.body.appendChild(themeToggle);
 
-        // Default to dark mode for "professional" feel if no preference
+        // Load saved theme and default to dark
+        const savedTheme = localStorage.getItem('theme');
         const initialTheme = savedTheme || 'dark';
 
         setTheme(initialTheme);
