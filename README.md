@@ -1,110 +1,78 @@
-# Arat Kilo Gibi Gubae - Quiz Mastery System
+# Arat Kilo Gibi Gubae - Community Hub
 
 ## Project Overview
-The Arat Kilo Gibi Gubae Quiz Mastery System is a modern, responsive multi-page dashboard designed to facilitate academic excellence and spiritual wisdom. It tracks participant progress via automated Telegram quiz rankings and provides a centralized hub for leaderboards, academic resources, spiritual materials (Gospel summaries), and community links.
+The **Arat Kilo Gibi Gubae Community Hub** is a professional, multi-faceted platform designed to serve the divine and academic needs of the Orthodox Tewahedo students' community. It serves as a unified digital home for academic excellence, spiritual wisdom, and campus connectivity, bridging the gap between various campuses and batches.
 
-The system is optimized for both desktop and mobile use, featuring PWA-like capabilities for a "native app" feel when saved to a home screen.
+The platform is built with a mobile-first philosophy, offering PWA (Progressive Web App) features that provide a premium, app-like experience for daily spiritual and academic life.
 
-## Key Features
-- **Cumulative Leaderboard**: Automated ranking system based on a sophisticated 50/25/25 weighted scoring model.
-- **Multi-Page Dashboard**:
-  - **Results**: Real-time searchable leaderboard with a podium for top performers.
-  - **Resources**: Dedicated tabs for Academic Support (Engineering/Science) and Spiritual Resources (Gospel of Mark summaries).
-  - **Links**: Comprehensive portal for local community Telegram channels and wider EOTC resources.
-- **Click-to-Reveal Remarks**: Hidden spiritual and humorous feedback based on performance (እግዚአብሔር ያክብራችሁ vs. Warning vs. Rebuking).
-- **Backend API**: FastAPI-powered backend for efficient data processing and JSON delivery.
-- **Docker Ready**: Fully containerized with Nginx reverse proxy and Redis support for production scalability.
-- **Progressive UI**: Mobile-optimized design with Ethiopian language (Ge'ez/Amharic) font support.
+## Core Pillars
 
-## Technology Stack
-- **Frontend**: HTML5, Vanilla CSS3 (Grid/Flexbox), JavaScript (ES6+)
-- **Backend API**: Python 3.11+, FastAPI, Uvicorn
-- **Data Science**: Pandas, NumPy
-- **Deployment**: Docker, Docker Compose, Nginx
-- **Security**: Non-root Docker execution, CORS middleware, PWA manifest configurations
+### 🎓 Academic Excellence
+Providing robust support for the "Arat Kilo" (Addis Ababa University) academic journey:
+- **Resource Repository**: Curated subject notes for engineering, natural sciences, and computer science.
+- **Exam Archives**: Access to past midterm and final examinations with model solutions.
+- **Peer Coordination**: A space for senior-to-junior knowledge transfer and guidance.
 
-## Project Structure
+### 📖 Spiritual Wisdom
+Deepening the roots of Orthodox Tewahedo faith:
+- **Gospel Studies**: Comprehensive summaries and interactive Q&A for the Gospel of Saint Mark (16 chapters).
+- **Study Guides**: Spiritual materials tailored for students' spiritual growth during their university years.
+- **Session Notes**: Digital archives of teachings from regular Gibi Gubae gatherings.
+
+### 🔗 Community Connectivity
+Unifying the Orthodox Tewahedo student body across campuses:
+- **Campus Directory**: Quick access to official channels for Arat Kilo, Amst Kilo, Sidist Kilo, and Saint Peter's campuses.
+- **Batch Integration**: Dedicated communication bridges for all active batches (2015–2018 E.C.).
+- **Ecclesiastical Portal**: Direct links to EOTC official media, Mahibere Kidusan (MK), and Tewahedo Media Center (TMC).
+
+### 🏆 Engagement & Gamification
+Encouraging active participation through the **Quiz Mastery System**:
+- **Cumulative Leaderboard**: Automated performance tracking with real-time ranking.
+- **Personalized Feedback**: Humorous and spiritual remarks (Click-to-Reveal) based on cumulative performance.
+- **Podium Recognition**: Celebrating top performers to foster healthy academic and spiritual competition.
+
+## Technical Details
+
+### Weighted Scoring Logic
+The engagement system uses a balanced 50/25/25 formula:
+1.  **50% Participation**: Rewards consistency (User Quizzes / Max Quizzes).
+2.  **25% Accuracy**: Rewards quality of knowledge (User Avg Score / Max Avg Score).
+3.  **25% Speed**: Rewards mental agility (≤ 50s = Full Points; > 50s = Weighted Score).
+
+### Technology Stack
+- **Web Frontend**: HTML5, Vanilla CSS3 (v3.0), JavaScript (ES6+).
+- **Data Engine**: Python 3.11 with Pandas for complex data normalization and weighted ranking.
+- **API Services**: FastAPI high-performance backend with automatic Swagger documentation.
+- **Infrastructure**: Fully containerized with Docker, Nginx (Reverse Proxy), and Redis.
+
+## Getting Started
+
+### Quick Start (Local)
+```bash
+# Clone and prepare
+git clone <repository-url> && cd cumulative-Rank
+python -m venv venv && source venv/bin/activate
+pip install -r requirements.txt
+
+# Generate hub data and start server
+python scripts/generate_rankings.py
+python scripts/main.py
 ```
-cumulative-Rank/
-├── assets/                 # Frontend static assets
-│   ├── css/               # Modular styling (style.css v3.0)
-│   ├── img/               # Brand assets, icons, and logo
-│   └── js/                # Performance-optimized client logic
-├── data/                  # Data persistence layer
-│   ├── quizRankData.txt   # Raw Telegram quiz data
-│   └── cumulative_leaderboard.csv  # Processed rankings (cached)
-├── docs/                  # Documentation and automated reports
-│   └── CumulativeLeaderboard.md  # Generated markdown report
-├── scripts/               # Application logic layer
-│   ├── main.py           # FastAPI production server
-│   ├── generate_rankings.py  # Ranking & Report generator
-│   ├── clean_data.py     # Data normalization utilities
-│   └── data_validator.py  # Input integrity checks
-├── Dockerfile             # Production container specification
-├── docker-compose.yml     # Multi-container orchestration
-├── DEPLOYMENT.md          # Comprehensive deployment guide
-├── index.html             # Main landing page
-├── results.html           # Interactive leaderboard
-├── resources.html         # Educational/Spiritual hub
-├── links.html             # Community links portal
-├── requirements.txt       # Python dependency manifest
-└── README.md             # This file
-```
 
-## Detailed Scoring Logic
-The system uses a weighted formula to ensure fairness and reward consistency:
-
-1.  **50% Participation**: `(User Quizzes / Max Quizzes) * 50`
-2.  **25% Accuracy**: `(User Avg Score / Max Avg Score) * 25`
-3.  **25% Speed**:
-    - **25 points** if average response time is ≤ 50 seconds.
-    - `(50 / Avg Time) * 25` if average time > 50 seconds.
-
-**Tie-Breaking Priority**:
-1. Accuracy (Avg Points)
-2. Speed (Avg Time)
-3. Total Participation
-4. Random Seed (for absolute ties)
-
-## Installation and Setup
-
-### Local Development
-1. **Clone and Enter**:
-   ```bash
-   git clone <repository-url>
-   cd cumulative-Rank
-   ```
-2. **Environment Setup**:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # venv\Scripts\activate on Windows
-   pip install -r requirements.txt
-   ```
-3. **Generate Rankings**:
-   ```bash
-   python scripts/generate_rankings.py
-   ```
-4. **Run Server**:
-   ```bash
-   python scripts/main.py
-   ```
-
-### Docker Deployment (Recommended for Production)
+### Production Setup
+For high availability and Nginx caching:
 ```bash
 docker-compose up -d
 ```
-Access the dashboard at `http://localhost`. The API runs on port `8000` behind an Nginx proxy.
 
-## API Documentation
-Once the server is running, visit:
-- **Swagger UI**: `http://localhost:8000/docs`
-- **Leaderboard JSON**: `http://localhost:8000/leaderboard`
+## Digital Presence
+Access the hub tools and documentation at:
+- **Hub Dashboard**: `http://localhost`
+- **Interactive API Docs**: `http://localhost:8000/docs`
 
-## Maintenance
-Developed and maintained by **Solomon Tsega**.
-- **Role**: Computer Science Student, AAU
-- **Contact**: tsegasolomon538@gmail.com
-- **LinkedIn**: [linkedin.com/in/solomontsega](https://linkedin.com/in/solomontsega)
+---
+**Maintained by Solomon Tsega**
+*Computer Science Student, AAU*
+[Email](mailto:tsegasolomon538@gmail.com) | [LinkedIn](https://linkedin.com/in/solomontsega)
 
-## License
-All rights reserved. Arat Kilo Gibi Gubae 2026.
+© 2026 Arat Kilo Gibi Gubae. Academic Excellence & Spiritual Wisdom.
