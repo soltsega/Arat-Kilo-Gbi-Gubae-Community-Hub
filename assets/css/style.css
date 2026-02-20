@@ -870,7 +870,8 @@ footer {
         -webkit-background-clip: text;
         background-clip: text;
         -webkit-text-fill-color: transparent;
-        animation: shimmer 3s ease-in-out infinite;
+        animation: none !important;
+        /* No shimmer on mobile headers */
     }
 
     @keyframes shimmer {
@@ -918,11 +919,12 @@ footer {
         transform: scale(0.98);
     }
 
-    .feature-card i {
+    .feature-card i,
+    .gospel-card i {
         font-size: 2.5rem;
         margin-bottom: 1rem;
         display: block;
-        animation: none;
+        animation: none !important;
         /* Disable floating on mobile per user request */
     }
 
@@ -955,25 +957,31 @@ footer {
     }
 
 
-    /* Mobile menu button adjustment */
+    /* Mobile menu button adjustment - moved down and made more subtle */
     .mobile-menu-btn {
         display: block;
         position: fixed;
-        top: 1.2rem;
-        right: 1.2rem;
+        bottom: 2rem;
+        /* Moved to bottom-right corner to avoid hiding header links */
+        right: 1.5rem;
         z-index: 1002;
         background: var(--primary);
         border: none;
-        border-radius: 12px;
-        width: 48px;
-        height: 48px;
+        border-radius: 50%;
+        /* Circle looks better for a floating action button */
+        width: 56px;
+        height: 56px;
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         cursor: pointer;
-        box-shadow: 0 4px 15px rgba(193, 155, 74, 0.4);
-        transition: 0.3s;
+        box-shadow: 0 8px 25px rgba(193, 155, 74, 0.5);
+        transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .mobile-menu-btn:active {
+        transform: scale(0.9) rotate(5deg);
     }
 
     .mobile-menu-btn span {
