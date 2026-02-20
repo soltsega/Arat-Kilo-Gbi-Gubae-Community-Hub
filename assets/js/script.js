@@ -70,14 +70,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Close menu when clicking outside
         document.addEventListener('click', (e) => {
-            if (navLinks && navLinks.classList.contains('active') && !nav.contains(e.target)) {
+            if (navLinks && navLinks.classList.contains('active') && !navLinks.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
                 mobileMenuBtn.classList.remove('active');
                 navLinks.classList.remove('active');
             }
         });
 
-        // Close menu when clicking a link
+        // Prevent clicks inside navLinks from closing the menu (unless it's a link)
         if (navLinks) {
+            navLinks.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+
             navLinks.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => {
                     mobileMenuBtn.classList.remove('active');

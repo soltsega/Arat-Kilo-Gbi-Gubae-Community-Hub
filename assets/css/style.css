@@ -783,27 +783,32 @@ footer {
     }
 
     .nav-links {
+        display: none;
+        flex-direction: column !important;
         position: fixed !important;
         top: 0 !important;
-        right: -100% !important;
-        width: 80% !important;
+        right: -280px !important;
+        width: 280px !important;
         height: 100vh !important;
-        background: var(--bg-primary) !important;
-        flex-direction: column !important;
-        justify-content: center !important;
-        align-items: center !important;
-        gap: 2rem !important;
-        transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
-        z-index: 1001 !important;
-        box-shadow: -10px 0 30px var(--shadow-color) !important;
-        padding: 3rem !important;
+        background: rgba(255, 255, 255, 0.95) !important;
+        border-left: 1px solid var(--border-color) !important;
+        padding: 5rem 1rem 2rem !important;
+        z-index: 1000 !important;
+        transition: right 0.4s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.4s !important;
+        visibility: hidden !important;
         backdrop-filter: blur(20px) !important;
         margin: 0 !important;
-        display: flex !important;
+        box-shadow: -10px 0 30px rgba(0, 0, 0, 0.1) !important;
+    }
+
+    [data-theme="dark"] .nav-links {
+        background: rgba(2, 44, 34, 0.95) !important;
     }
 
     .nav-links.active {
+        display: flex !important;
         right: 0 !important;
+        visibility: visible !important;
     }
 
     .nav-links li {
@@ -812,10 +817,19 @@ footer {
     }
 
     .nav-links a {
-        font-size: 1.5rem !important;
+        font-size: 1.25rem !important;
         display: block !important;
-        padding: 1rem !important;
+        padding: 1.2rem !important;
         color: var(--text-main) !important;
+        border-radius: 12px !important;
+        transition: background 0.2s ease !important;
+        text-align: left !important;
+    }
+
+    .nav-links a:active,
+    .nav-links a.active {
+        background: rgba(193, 155, 74, 0.1) !important;
+        color: var(--primary) !important;
     }
 
     /* ALL Mobile Animations Disabled */
