@@ -100,7 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { passive: true });
     }
 
-    // Mobile menu functionality
     function initMobileMenu() {
         if (!isMobile) return;
 
@@ -109,7 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const mobileMenuBtn = document.createElement('button');
         mobileMenuBtn.className = 'mobile-menu-btn';
         mobileMenuBtn.innerHTML = '<span></span><span></span><span></span>';
-        nav.appendChild(mobileMenuBtn);
+        document.body.appendChild(mobileMenuBtn);
 
         mobileMenuBtn.addEventListener('click', (e) => {
             e.stopPropagation();
