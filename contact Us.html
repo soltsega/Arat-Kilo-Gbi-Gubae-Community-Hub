@@ -188,20 +188,63 @@
 
     <script src="assets/js/script.js"></script>
     <script>
+        // Google Sheets configuration
+        const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxfsZYVRkXyIqnSEKsALYn9me85e9d43EDEq-f8wM4wC5zdeEezsR1aAUvGy2e78Sf-/exec'; // You'll need to replace this
+        
         document.getElementById('reviewForm').addEventListener('submit', function(e) {
             e.preventDefault();
             
-            // Show success message
-            document.getElementById('successMessage').style.display = 'block';
+            // Show loading state
+            const submitBtn = document.querySelector('.btn-primary');
+            const originalText = submitBtn.textContent;
+            submitBtn.textContent = 'Submitting...';
+            submitBtn.disabled = true;
             
-            // Scroll to success message
-            document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+            // Get form data
+            const formData = new FormData(this);
+            const data = {
+                timestamp: new Date().toISOString(),
+                name: formData.get('name'),
+                email: formData.get('email'),
+                subject: formData.get('subject'),
+                improvements: formData.get('improvements'),
+                features: formData.get('features'),
+                experience: formData.get('experience'),
+                message: formData.get('message')
+            };
             
-            // Clear form after 2 seconds
-            setTimeout(() => {
-                clearForm();
-                document.getElementById('successMessage').style.display = 'none';
-            }, 5000);
+            // Send to Google Sheets
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data)
+            })
+            .then(response => {
+                // Show success message
+                document.getElementById('successMessage').style.display = 'block';
+                
+                // Scroll to success message
+                document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+                
+                // Clear form after 3 seconds
+                setTimeout(() => {
+                    clearForm();
+                    document.getElementById('successMessage').style.display = 'none';
+                }, 3000);
+            })
+            .catch(error => {
+                // Show error message
+                alert('There was an error submitting your feedback. Please try again later.');
+                console.error('Submission error:', error);
+            })
+            .finally(() => {
+                // Reset button
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+            });
         });
 
         function clearForm() {
