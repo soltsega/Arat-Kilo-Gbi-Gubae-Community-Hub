@@ -37,3 +37,8 @@ scripts/simple_contact_script.gs
 scripts/debug_script.gs
 simple_test.html
 post_test.html
+data/raw/MattewMarkLuke.txt.bak
+data/raw/MattewMarkLuke.txt
+data/raw/Acts10.txt
+data/processed/MattewMarkLuke_cleaned.txt
+data/processed/Acts10Cleaned.txt
