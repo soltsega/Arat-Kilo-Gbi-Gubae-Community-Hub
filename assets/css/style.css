@@ -909,8 +909,8 @@ tr:hover td {
 
 .tab-icon img,
 .tab-icon svg {
-    width: 20px;
-    height: 20px;
+    width: 26px;
+    height: 26px;
     border-radius: 4px;
     object-fit: cover;
 }
