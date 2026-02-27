@@ -278,8 +278,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         visualOrder.forEach((user, index) => {
             if (!user) return;
+            const isFirst = classes[index] === 'first';
+            const isCumulative = currentCSV.includes('AllGospels_Leaderboard');
+
             const card = document.createElement('div');
-            card.className = `podium-card ${classes[index]}`;
+            card.className = `podium-card ${classes[index]} ${isFirst && isCumulative ? 'first-celebrate' : ''}`;
             card.innerHTML = `
                 <span class="rank-icon">${icons[index]}</span>
                 <div class="user-name-wrapper">
@@ -303,6 +306,61 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
             podiumContainer.appendChild(card);
         });
+
+        // Trigger rockets for Cumulative champions
+        if (currentCSV.includes('AllGospels_Leaderboard')) {
+            setTimeout(launchRockets, 500);
+        }
+    }
+
+    function launchRockets() {
+        const container = document.createElement('div');
+        container.className = 'rocket-container';
+        document.body.appendChild(container);
+
+        const colors = ['#fbbf24', '#f8fafc', '#10b981', '#c19b4a'];
+
+        for (let i = 0; i < 8; i++) {
+            setTimeout(() => {
+                const rocket = document.createElement('div');
+                rocket.className = 'rocket';
+                rocket.style.left = Math.random() * 80 + 10 + '%';
+                rocket.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                container.appendChild(rocket);
+
+                // Explode after launch
+                setTimeout(() => {
+                    const rect = rocket.getBoundingClientRect();
+                    createFirework(rect.left, rect.top, rocket.style.backgroundColor, container);
+                    rocket.remove();
+                }, 1400);
+            }, i * 300);
+        }
+
+        // Clean up
+        setTimeout(() => container.remove(), 8000);
+    }
+
+    function createFirework(x, y, color, container) {
+        for (let i = 0; i < 20; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = x + 'px';
+            particle.style.top = y + 'px';
+            particle.style.backgroundColor = color;
+
+            const angle = Math.random() * Math.PI * 2;
+            const velocity = Math.random() * 100 + 50;
+            const tx = Math.cos(angle) * velocity + 'px';
+            const ty = Math.sin(angle) * velocity + 'px';
+
+            particle.style.setProperty('--tx', tx);
+            particle.style.setProperty('--ty', ty);
+            particle.style.animation = 'explode 1s ease-out forwards';
+
+            container.appendChild(particle);
+            setTimeout(() => particle.remove(), 1000);
+        }
     }
 
     function renderTable(data) {

@@ -267,6 +267,78 @@ h1 {
     height: 280px;
 }
 
+/* Rocket & Firework Celebration Styles */
+.rocket-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.rocket {
+    position: absolute;
+    bottom: -50px;
+    width: 4px;
+    height: 20px;
+    background: var(--primary);
+    border-radius: 2px;
+    animation: launch 1.5s ease-out forwards;
+}
+
+.particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+@keyframes launch {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+
+    70% {
+        transform: translateY(-80vh) scale(1.2);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-85vh) scale(0);
+        opacity: 0;
+    }
+}
+
+@keyframes explode {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(var(--tx), var(--ty)) scale(0);
+        opacity: 0;
+    }
+}
+
+.first-celebrate {
+    animation: gold-glow 2s infinite alternate;
+}
+
+@keyframes gold-glow {
+    from {
+        box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+    }
+
+    to {
+        box-shadow: 0 0 60px rgba(251, 191, 36, 0.8), 0 0 100px rgba(251, 191, 36, 0.4);
+    }
+}
+
 .user-name-wrapper h3 {
     font-size: 1.6rem;
     font-weight: 700;
@@ -932,7 +1004,7 @@ tr:hover td {
     background: rgba(193, 155, 74, 0.1);
 }
 
-.rating-option input[type="radio"]:checked + .rating-label {
+.rating-option input[type="radio"]:checked+.rating-label {
     background: var(--primary);
     color: white;
 }
