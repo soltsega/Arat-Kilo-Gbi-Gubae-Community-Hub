@@ -44,16 +44,24 @@
     <header>
         <div class="container">
             <h1>Bible Study - 4 kilo Gibi Gubae</h1>
-            <h1>Cumulative Leaderboard: Gospel of Saint John </h1>
-            <p class="subtitle">Acts/የሐዋርያት ስራ - Will be updated soon</p>
-            <p>Join here to follow up with us: <a href="https://t.me/gibi_gubae_bible"
-                    style="text-decoration: none; color: #c19b4a;">መጽሐፍ ቅዱስ ጥናት ዘ፬ ኪሎ ግቢ ጉባኤ</a>
-            </p>
+            <h1>Cumulative Leaderboards</h1>
             <p class="subtitle">Official Quiz Bot Rankings</p>
         </div>
     </header>
 
     <main id="main" class="container">
+        <!-- Tab Navigation -->
+        <section class="tab-navigation">
+            <button class="tab-btn active" data-tab="john" data-csv="data/cumulative_leaderboard.csv">
+                <span class="tab-icon">📖</span>
+                Gospel of John
+            </button>
+            <button class="tab-btn" data-tab="four-gospels" data-csv="data/processed/MattewMarkLukeJohn_cleaned_leaderboard.csv">
+                <span class="tab-icon">📚</span>
+                Four Gospels
+            </button>
+        </section>
+
         <!-- Podium Section -->
         <section id="podium" class="podium-container">
             <!-- Will be populated by JS -->

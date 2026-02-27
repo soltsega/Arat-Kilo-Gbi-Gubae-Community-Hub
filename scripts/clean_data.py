@@ -1,4 +1,6 @@
+# For file input and output
 import os
+# We import shutil to 
 import shutil
 import sys
 
