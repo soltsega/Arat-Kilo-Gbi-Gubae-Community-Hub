@@ -306,14 +306,18 @@ document.addEventListener('DOMContentLoaded', () => {
             `;
 
             if (isFirst && isCumulative) {
-                const reveal = () => {
+                const reveal = (e) => {
                     if (card.classList.contains('revealed')) return;
+                    // Prevent multiple triggers
+                    if (e.type === 'touchstart') e.preventDefault();
+
                     card.classList.add('revealed');
                     card.classList.remove('champion-hidden');
                     celebrateReveal(card);
                     hapticFeedback();
                 };
                 card.addEventListener('click', reveal);
+                card.addEventListener('touchstart', reveal, { passive: false });
                 card.addEventListener('mouseenter', reveal);
             }
 
@@ -323,8 +327,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function celebrateReveal(element) {
         const rect = element.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
+        const centerX = rect.left + rect.width / 2 + window.scrollX;
+        const centerY = rect.top + rect.height / 2 + window.scrollY;
 
         launchRockets();
 
@@ -361,7 +365,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Explode after launch
                 setTimeout(() => {
                     const rect = rocket.getBoundingClientRect();
-                    createFirework(rect.left, rect.top, rocket.style.backgroundColor, container);
+                    createFirework(rect.left + window.scrollX, rect.top + window.scrollY, rocket.style.backgroundColor, container);
                     rocket.remove();
                 }, 1400);
             }, i * 300);
