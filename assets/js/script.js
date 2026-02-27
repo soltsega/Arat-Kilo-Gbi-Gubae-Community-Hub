@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
     let leaderboardData = [];
     let originalData = [];
+    let currentCSV = 'data/cumulative_leaderboard.csv';
 
     // Mobile detection
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -215,21 +216,18 @@ document.addEventListener('DOMContentLoaded', () => {
     async function fetchData() {
         if (!podiumContainer && !tableBody) return;
 
-        // Frontend-only: Load from local CSV file
-        const CSV_URL = 'data/cumulative_leaderboard.csv';
-
         // Show loading states
         showLoading(podiumContainer, 'Loading top champions...');
         showLoading(tableBody, 'Loading leaderboard data...');
 
         try {
-            const response = await fetch(CSV_URL);
+            const response = await fetch(currentCSV);
             if (!response.ok) throw new Error('CSV file not found');
             const csvText = await response.text();
             parseCSV(csvText);
         } catch (error) {
             console.error('Leaderboard load failed:', error);
-            showError(podiumContainer, 'Unable to load leaderboard data. Please check if data/cumulative_leaderboard.csv exists.');
+            showError(podiumContainer, 'Unable to load leaderboard data. Please check if the CSV file exists.');
             if (tableBody) {
                 tableBody.innerHTML = '<tr><td colspan="7" class="error">Unable to load data. Please check the data source.</td></tr>';
             }
@@ -341,26 +339,23 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Tab Switching Logic for Resources Page
+    // Tab Switching Logic for Leaderboards
     const tabButtons = document.querySelectorAll('.tab-btn');
-    const tabContents = document.querySelectorAll('.tab-content');
 
     if (tabButtons.length > 0) {
         tabButtons.forEach(btn => {
             btn.addEventListener('click', () => {
-                const tabId = btn.getAttribute('data-tab');
-
+                const csvFile = btn.getAttribute('data-csv');
+                
                 // Update buttons
                 tabButtons.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-
-                // Update content
-                tabContents.forEach(content => {
-                    content.classList.remove('active');
-                    if (content.id === tabId) {
-                        content.classList.add('active');
-                    }
-                });
+                
+                // Update current CSV and reload data
+                currentCSV = csvFile;
+                searchInput.value = ''; // Clear search
+                fetchData();
+                hapticFeedback();
             });
         });
     }

@@ -1878,6 +1878,24 @@ footer {
     border-bottom: 1px solid var(--border-color);
 }
 
+.tab-navigation {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 16px;
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--border-color);
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.tab-icon {
+    margin-right: 0.5rem;
+    font-size: 1.2rem;
+}
+
 .tabs::-webkit-scrollbar {
     display: none;
 }
