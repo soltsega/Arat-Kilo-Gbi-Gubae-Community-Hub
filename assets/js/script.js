@@ -211,10 +211,12 @@ document.addEventListener('DOMContentLoaded', () => {
             clearTimeout(timeout);
             timeout = setTimeout(later, wait);
         };
-    }
+    };
 
     async function fetchData() {
         if (!podiumContainer && !tableBody) return;
+
+        console.log('Fetching data from:', currentCSV); // Debug log
 
         // Show loading states
         showLoading(podiumContainer, 'Loading top champions...');
@@ -227,9 +229,9 @@ document.addEventListener('DOMContentLoaded', () => {
             parseCSV(csvText);
         } catch (error) {
             console.error('Leaderboard load failed:', error);
-            showError(podiumContainer, 'Unable to load leaderboard data. Please check if the CSV file exists.');
+            showError(podiumContainer, 'Unable to load leaderboard data. Please check if CSV file exists.');
             if (tableBody) {
-                tableBody.innerHTML = '<tr><td colspan="7" class="error">Unable to load data. Please check the data source.</td></tr>';
+                tableBody.innerHTML = '<tr><td colspan="7" class="error">Unable to load data. Please check data source.</td></tr>';
             }
         }
     }
@@ -346,6 +348,7 @@ document.addEventListener('DOMContentLoaded', () => {
         tabButtons.forEach(btn => {
             btn.addEventListener('click', () => {
                 const csvFile = btn.getAttribute('data-csv');
+                console.log('Tab clicked, CSV file:', csvFile); // Debug log
                 
                 // Update buttons
                 tabButtons.forEach(b => b.classList.remove('active'));
