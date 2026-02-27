@@ -14,7 +14,7 @@ pip-selfcheck.json
 .vscode/
 *.swp
 *.swo
-
+individual/
 # Project specific
 status.txt
 cumulative_data.txt
@@ -42,3 +42,18 @@ data/raw/MattewMarkLuke.txt
 data/raw/Acts10.txt
 data/processed/MattewMarkLuke_cleaned.txt
 data/processed/Acts10Cleaned.txt
+data/johnonly.txt
+data/quizRankData.txt
+data/processed/individual/Luke_Cleaned.txt
+.gitignore
+data/processed/individual/Other_Gospels_Cleaned.txt
+data/raw/AllGospels_Final_Combined.txt
+data/raw/AllGospels_Combined.txt
+data/processed/individual/Matthew_Luke_Combined_Cleaned.txt
+data/processed/individual/Mark_Cleaned.txt
+data/raw/johnonly.txt
+scripts/detect_duplicates.py
+scripts/generate_combined_rankings.py
+data/processed/MattewMarkLukeJohn_cleaned_leaderboard.csv
+data/processed/MattewMarkLukeJohn_cleaned_leaderboard.csv
+data/processed/MattewMarkLukeJohn_cleaned_leaderboard.csv
