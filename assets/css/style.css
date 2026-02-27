@@ -1006,6 +1006,18 @@ tr:hover td {
     border-color: var(--primary);
 }
 
+.contact-content a {
+    color: var(--primary-light);
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.contact-content a:hover {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
 .contact-card::before {
     content: '';
     position: absolute;
