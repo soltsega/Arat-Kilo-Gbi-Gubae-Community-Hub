@@ -862,9 +862,115 @@ tr:hover td {
     line-height: 1.5;
 }
 
-/* Contact Page Styles */
-.contact-info-section {
-    margin: 3rem 0;
+/* Navigation & Tab Refinements */
+.tab-navigation {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    justify-content: center;
+}
+
+.tab-navigation::-webkit-scrollbar {
+    display: none;
+}
+
+.tab-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 12px;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-dim);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+}
+
+.tab-btn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.tab-btn.active {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+    border-color: var(--primary);
+    color: white;
+    box-shadow: 0 4px 12px rgba(193, 155, 74, 0.3);
+}
+
+.tab-icon img,
+.tab-icon svg {
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.tab-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    filter: grayscale(0.8);
+}
+
+.tab-badge {
+    font-size: 0.65rem;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2px 8px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 800;
+    margin-left: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    animation: pulse-soft 2s infinite;
+}
+
+@keyframes pulse-soft {
+    0% {
+        opacity: 0.6;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0.6;
+    }
+}
+
+/* Enhanced Mystery Card */
+.podium-card.first.champion-hidden {
+    background: linear-gradient(45deg, var(--card-bg) 25%, rgba(255, 255, 255, 0.05) 50%, var(--card-bg) 75%);
+    background-size: 200% 200%;
+    animation: shimmer 3s infinite linear;
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% 0;
+    }
+
+    100% {
+        background-position: 200% 0;
+    }
+}
+
+.podium-card.first.champion-hidden::before {
+    content: '?';
+    font-family: 'Outfit', sans-serif;
+    color: var(--primary);
+    text-shadow: 0 0 15px rgba(193, 155, 74, 0.5);
+    filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.5));
 }
 
 .contact-info-section h2 {
