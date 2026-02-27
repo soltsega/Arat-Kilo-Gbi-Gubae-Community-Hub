@@ -53,7 +53,8 @@
 
     <main class="container">
         <section class="hero secondary-hero">
-            <p>Your feedback helps us improve and grow. Whether you have suggestions for new features, improvements to existing functionality, or general comments about your experience, we'd love to hear from you.</p>
+            <p>Your feedback helps us improve and grow. Whether you have suggestions for new features, improvements to
+                existing functionality, or general comments about your experience, we'd love to hear from you.</p>
         </section>
 
         <!-- Contact Information Section -->
@@ -62,22 +63,26 @@
             <div class="contact-grid">
                 <div class="contact-card">
                     <div class="contact-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13 9-5 9 5"></path>
-                            <path d="M3.59 4.59A2 2 0 0 1 5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 .41-1.41z"></path>
+                            <path
+                                d="M3.59 4.59A2 2 0 0 1 5 3h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 .41-1.41z">
+                            </path>
                             <line x1="12" y1="19" x2="12" y2="19"></line>
                         </svg>
                     </div>
                     <div class="contact-content">
                         <h3>Telegram</h3>
-                        <p>@AratKiloGibiGubae</p>
+                        <a href="https://t.me/gubaeze4k">@gubaeze4k</a>
                         <span class="contact-label">Community Channel</span>
                     </div>
                 </div>
 
                 <div class="contact-card">
                     <div class="contact-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M12 2L2 7l10 5 10-5-10 5z"></path>
                             <path d="M2 17l10 5 10-5M2 12l10 5 10-5"></path>
                         </svg>
@@ -85,7 +90,8 @@
                     <div class="contact-content">
                         <h3>Location</h3>
                         <p>Arat Kilo, Addis Ababa</p>
-                        <span class="contact-label">Physical Location</span>
+                        <a href="https://maps.app.goo.gl/uQji4xtGEvLBAoFf6" target="_blank"><span
+                                class="contact-label">Physical Location</span></a>
                     </div>
                 </div>
             </div>
@@ -123,12 +129,14 @@
 
                     <div class="form-group">
                         <label for="improvements">Areas for Improvement</label>
-                        <textarea id="improvements" name="improvements" rows="3" placeholder="What aspects of the website could be improved? (e.g., navigation, design, functionality)"></textarea>
+                        <textarea id="improvements" name="improvements" rows="3"
+                            placeholder="What aspects of the website could be improved? (e.g., navigation, design, functionality)"></textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="features">Suggested Features</label>
-                        <textarea id="features" name="features" rows="3" placeholder="What new features would you like to see? (e.g., new pages, tools, integrations)"></textarea>
+                        <textarea id="features" name="features" rows="3"
+                            placeholder="What new features would you like to see? (e.g., new pages, tools, integrations)"></textarea>
                     </div>
 
                     <div class="form-group">
@@ -157,7 +165,8 @@
 
                     <div class="form-group">
                         <label for="message">Additional Comments</label>
-                        <textarea id="message" name="message" rows="4" placeholder="Any other thoughts, feedback, or messages you'd like to share..."></textarea>
+                        <textarea id="message" name="message" rows="4"
+                            placeholder="Any other thoughts, feedback, or messages you'd like to share..."></textarea>
                     </div>
 
                     <div class="form-actions">
@@ -169,7 +178,8 @@
                 <div id="successMessage" class="success-message" style="display: none;">
                     <div class="success-content">
                         <div class="success-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                 <polyline points="20 6 9 17 4 12"></polyline>
                             </svg>
                         </div>
@@ -190,16 +200,16 @@
     <script>
         // Google Sheets configuration
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxg4biF5cUzRjThH3Rgl1i34w63gAGQk7AHvJE2sX5MZQvcFkhGgaS9VUVTEZ3ZSoFC/exec'; // You'll need to replace this
-        
-        document.getElementById('reviewForm').addEventListener('submit', function(e) {
+
+        document.getElementById('reviewForm').addEventListener('submit', function (e) {
             e.preventDefault();
-            
+
             // Show loading state
             const submitBtn = document.querySelector('.btn-primary');
             const originalText = submitBtn.textContent;
             submitBtn.textContent = 'Submitting...';
             submitBtn.disabled = true;
-            
+
             // Get form data
             const formData = new FormData(this);
             const data = {
@@ -212,7 +222,7 @@
                 experience: formData.get('experience'),
                 message: formData.get('message')
             };
-            
+
             // Send to Google Sheets
             fetch(SCRIPT_URL, {
                 method: 'POST',
@@ -222,29 +232,29 @@
                 },
                 body: JSON.stringify(data)
             })
-            .then(response => {
-                // Show success message
-                document.getElementById('successMessage').style.display = 'block';
-                
-                // Scroll to success message
-                document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
-                
-                // Clear form after 3 seconds
-                setTimeout(() => {
-                    clearForm();
-                    document.getElementById('successMessage').style.display = 'none';
-                }, 3000);
-            })
-            .catch(error => {
-                // Show error message
-                alert('There was an error submitting your feedback. Please try again later.');
-                console.error('Submission error:', error);
-            })
-            .finally(() => {
-                // Reset button
-                submitBtn.textContent = originalText;
-                submitBtn.disabled = false;
-            });
+                .then(response => {
+                    // Show success message
+                    document.getElementById('successMessage').style.display = 'block';
+
+                    // Scroll to success message
+                    document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
+
+                    // Clear form after 3 seconds
+                    setTimeout(() => {
+                        clearForm();
+                        document.getElementById('successMessage').style.display = 'none';
+                    }, 3000);
+                })
+                .catch(error => {
+                    // Show error message
+                    alert('There was an error submitting your feedback. Please try again later.');
+                    console.error('Submission error:', error);
+                })
+                .finally(() => {
+                    // Reset button
+                    submitBtn.textContent = originalText;
+                    submitBtn.disabled = false;
+                });
         });
 
         function clearForm() {
