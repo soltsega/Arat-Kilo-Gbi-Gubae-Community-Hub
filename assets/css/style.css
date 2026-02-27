@@ -384,10 +384,70 @@ h1 {
     border-radius: 24px;
 }
 
-.podium-card:hover .blessing-overlay {
+.podium-card.first.champion-hidden {
+    cursor: pointer;
+}
+
+.podium-card.first.champion-hidden .user-name-wrapper,
+.podium-card.first.champion-hidden .score,
+.podium-card.first.champion-hidden .label,
+.podium-card.first.champion-hidden .stats-mini,
+.podium-card.first.champion-hidden .rank-icon {
+    filter: blur(20px);
+    opacity: 0.1;
+    transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.podium-card.first.champion-hidden::before {
+    content: '?';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 5rem;
+    font-weight: 800;
+    color: var(--primary);
     opacity: 1;
-    visibility: visible;
-    transform: scale(1) rotateX(0);
+    transition: all 0.5s ease;
+    z-index: 5;
+}
+
+.podium-card.first.revealed .user-name-wrapper,
+.podium-card.first.revealed .score,
+.podium-card.first.revealed .label,
+.podium-card.first.revealed .stats-mini,
+.podium-card.first.revealed .rank-icon {
+    filter: blur(0);
+    opacity: 1;
+}
+
+.podium-card.first.revealed::before {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(2);
+}
+
+.popper {
+    position: absolute;
+    font-size: 2rem;
+    pointer-events: none;
+    z-index: 100;
+    animation: popOut 1s ease-out forwards;
+}
+
+@keyframes popOut {
+    0% {
+        transform: scale(0) rotate(0);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(var(--px), var(--py)) scale(1.5) rotate(var(--pr));
+        opacity: 0;
+    }
 }
 
 .blessing-content {

@@ -282,7 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const isCumulative = currentCSV.includes('AllGospels_Leaderboard');
 
             const card = document.createElement('div');
-            card.className = `podium-card ${classes[index]} ${isFirst && isCumulative ? 'first-celebrate' : ''}`;
+            card.className = `podium-card ${classes[index]} ${isFirst && isCumulative ? 'champion-hidden' : ''} ${isFirst && isCumulative ? 'first-celebrate' : ''}`;
             card.innerHTML = `
                 <span class="rank-icon">${icons[index]}</span>
                 <div class="user-name-wrapper">
@@ -304,12 +304,42 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>
             `;
+
+            if (isFirst && isCumulative) {
+                const reveal = () => {
+                    if (card.classList.contains('revealed')) return;
+                    card.classList.add('revealed');
+                    card.classList.remove('champion-hidden');
+                    celebrateReveal(card);
+                    hapticFeedback();
+                };
+                card.addEventListener('click', reveal);
+                card.addEventListener('mouseenter', reveal);
+            }
+
             podiumContainer.appendChild(card);
         });
+    }
 
-        // Trigger rockets for Cumulative champions
-        if (currentCSV.includes('AllGospels_Leaderboard')) {
-            setTimeout(launchRockets, 500);
+    function celebrateReveal(element) {
+        const rect = element.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        launchRockets();
+
+        // 🎉 Burst
+        for (let i = 0; i < 15; i++) {
+            const popper = document.createElement('div');
+            popper.className = 'popper';
+            popper.textContent = '🎉';
+            popper.style.left = centerX + 'px';
+            popper.style.top = centerY + 'px';
+            popper.style.setProperty('--px', (Math.random() - 0.5) * 400 + 'px');
+            popper.style.setProperty('--py', (Math.random() - 0.5) * 400 + 'px');
+            popper.style.setProperty('--pr', Math.random() * 360 + 'deg');
+            document.body.appendChild(popper);
+            setTimeout(() => popper.remove(), 1000);
         }
     }
 
