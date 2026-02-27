@@ -52,26 +52,33 @@
     <main id="main" class="container">
         <!-- Tab Navigation -->
         <section class="tab-navigation">
-            <button class="tab-btn active" data-tab="john" data-csv="data/cumulative_leaderboard.csv">
+            <button class="tab-btn active" data-tab="cumulative" data-csv="data/processed/AllGospels_Leaderboard.csv">
                 <span class="tab-icon">
-                    <img src="data/Saint_John.png" alt="Gospel of John" style="width: 20px; height: 20px; border-radius: 4px;">
+                    <img src="data/All_Gospels.png" alt="All Gospels"
+                        style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
                 </span>
-                Gospel of John
+                Cumulative
             </button>
-            <button class="tab-btn" data-tab="four-gospels" data-csv="data/processed/MattewMarkLukeJohn_cleaned_leaderboard.csv">
+            <button class="tab-btn" data-tab="john" data-csv="data/processed/John_Leaderboard.csv">
                 <span class="tab-icon">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2L2 7V12C2 16.55 4.84 20.74 9 22.5V12H15V22.5C19.16 20.74 22 16.55 22 12V7L12 2Z" fill="url(#gospel-gradient)" stroke="#c19b4a" stroke-width="1"/>
-                        <path d="M7 8H17M7 12H17M7 16H17" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round"/>
-                        <defs>
-                            <linearGradient id="gospel-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                                <stop offset="0%" style="stop-color:#c19b4a;stop-opacity:1" />
-                                <stop offset="100%" style="stop-color:#dfc17b;stop-opacity:1" />
-                            </linearGradient>
-                        </defs>
-                    </svg>
+                    <img src="data/Saint_John.png" alt="St. John"
+                        style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
                 </span>
-                Four Gospels
+                John
+            </button>
+            <button class="tab-btn" data-tab="luke" data-csv="data/processed/Luke_Leaderboard.csv">
+                <span class="tab-icon">
+                    <img src="data/Saint_luke.png" alt="St. Luke"
+                        style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
+                </span>
+                Luke
+            </button>
+            <button class="tab-btn" data-tab="mark" data-csv="data/processed/Mark_Leaderboard.csv">
+                <span class="tab-icon">
+                    <img src="data/Saint_Mark.png" alt="St. Mark"
+                        style="width: 24px; height: 24px; border-radius: 4px; object-fit: cover;">
+                </span>
+                Mark
             </button>
         </section>
 

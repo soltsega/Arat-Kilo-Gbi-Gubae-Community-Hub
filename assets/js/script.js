@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
     let leaderboardData = [];
     let originalData = [];
-    let currentCSV = 'data/cumulative_leaderboard.csv';
+    let currentCSV = 'data/processed/AllGospels_Leaderboard.csv';
 
     // Mobile detection
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -349,11 +349,11 @@ document.addEventListener('DOMContentLoaded', () => {
             btn.addEventListener('click', () => {
                 const csvFile = btn.getAttribute('data-csv');
                 console.log('Tab clicked, CSV file:', csvFile); // Debug log
-                
+
                 // Update buttons
                 tabButtons.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                
+
                 // Update current CSV and reload data
                 currentCSV = csvFile;
                 searchInput.value = ''; // Clear search
