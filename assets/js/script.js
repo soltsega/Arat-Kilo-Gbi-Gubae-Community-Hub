@@ -446,10 +446,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 tabButtons.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
 
-                // Update current CSV and reload data
-                currentCSV = csvFile;
-                searchInput.value = ''; // Clear search
-                fetchData();
+                // Update tab content visibility
+                const tabId = btn.getAttribute('data-tab');
+                if (tabId) {
+                    const tabContents = document.querySelectorAll('.tab-content');
+                    tabContents.forEach(content => {
+                        content.classList.remove('active');
+                        if (content.id === tabId) {
+                            content.classList.add('active');
+                        }
+                    });
+                }
+
+                // Update current CSV and reload data (only on leaderboard pages)
+                if (csvFile) {
+                    currentCSV = csvFile;
+                    if (searchInput) searchInput.value = ''; // Clear search
+                    fetchData();
+                }
                 hapticFeedback();
             });
         });
