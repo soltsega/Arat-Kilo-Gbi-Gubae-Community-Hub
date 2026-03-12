@@ -865,10 +865,10 @@ tr:hover td {
 /* Navigation & Tab Refinements */
 .tab-navigation {
     display: flex;
-    gap: 0.75rem;
-    margin-bottom: 2rem;
+    gap: 1.25rem;
+    margin-bottom: 3rem;
     overflow-x: auto;
-    padding-bottom: 0.5rem;
+    padding: 1rem 0.5rem;
     -ms-overflow-style: none;
     scrollbar-width: none;
     justify-content: center;
@@ -881,17 +881,18 @@ tr:hover td {
 .tab-btn {
     display: flex;
     align-items: center;
-    gap: 0.5rem;
-    padding: 0.75rem 1.25rem;
-    border-radius: 12px;
+    gap: 0.75rem;
+    padding: 1.25rem 2.5rem;
+    border-radius: 16px;
     background: var(--card-bg);
     border: 1px solid var(--border-color);
     color: var(--text-dim);
-    font-weight: 600;
-    font-size: 0.9rem;
+    font-weight: 700;
+    font-size: 1.15rem;
     cursor: pointer;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     white-space: nowrap;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .tab-btn:hover:not(:disabled) {
@@ -909,9 +910,9 @@ tr:hover td {
 
 .tab-icon img,
 .tab-icon svg {
-    width: 26px;
-    height: 26px;
-    border-radius: 4px;
+    width: 36px;
+    height: 36px;
+    border-radius: 6px;
     object-fit: cover;
 }
 
@@ -2133,11 +2134,11 @@ footer {
 
 .tab-navigation {
     display: flex;
-    gap: 1rem;
-    margin-bottom: 2rem;
-    padding: 1rem;
+    gap: 1.25rem;
+    margin-bottom: 3rem;
+    padding: 1.25rem;
     background: rgba(255, 255, 255, 0.02);
-    border-radius: 16px;
+    border-radius: 20px;
     backdrop-filter: blur(10px);
     border: 1px solid var(--border-color);
     flex-wrap: wrap;
@@ -2157,14 +2158,15 @@ footer {
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid var(--border-color);
     color: var(--text-dim);
-    font-size: 1rem;
-    font-weight: 600;
-    padding: 0.8rem 2rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    padding: 1.25rem 2.5rem;
     cursor: pointer;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    border-radius: 12px;
+    border-radius: 16px;
     white-space: nowrap;
     backdrop-filter: blur(10px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .tab-btn:hover {
