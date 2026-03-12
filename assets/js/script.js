@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
     let leaderboardData = [];
     let originalData = [];
-    let currentCSV = 'data/processed/AllGospels_Leaderboard.csv';
+    let currentCSV = null;
 
     // Mobile detection
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
