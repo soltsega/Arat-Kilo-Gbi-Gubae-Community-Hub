@@ -297,29 +297,27 @@ document.addEventListener('DOMContentLoaded', () => {
                     <div class="blessing-content">
                         <span class="sparkle">✨</span>
                         <p class="blessing-text">
-                            እንኳን ደስ አለህ/አለሽ! <br>
-                            እግዚአብሔር ያክብርልን፤ በቤቱ ያጽናልን። በዕውቀት ላይ ዕውቀት፣ በጸጋ ላይ ጸጋ ይጨምርልህ/ሽ።
+                            እግዚአብሔር ያክብራችሁ፤ በእድሜ በጸጋ ይጠብቃችሁ፤ በቤቱ ያጽናችሁ🥰 <br>
+                            <small>መልካሙን ሥራችሁን አይተው በሰማያት ያለውን አባታችሁን እንዲያከብሩ ብርሃናችሁ እንዲሁ በሰው ፊት ይብራ። <br> ማቴዎስ 5፥16</small>
                         </p>
                         <span class="sparkle">✨</span>
                     </div>
                 </div>
             `;
 
-            if (isFirst && isCumulative) {
-                const reveal = (e) => {
-                    if (card.classList.contains('revealed')) return;
-                    // Prevent multiple triggers
-                    if (e.type === 'touchstart') e.preventDefault();
+            // Enable reveal on hover/click for all podium cards
+            const reveal = (e) => {
+                if (card.classList.contains('revealed')) return;
+                if (e.type === 'touchstart') e.preventDefault();
 
-                    card.classList.add('revealed');
-                    card.classList.remove('champion-hidden');
-                    celebrateReveal(card);
-                    hapticFeedback();
-                };
-                card.addEventListener('click', reveal);
-                card.addEventListener('touchstart', reveal, { passive: false });
-                card.addEventListener('mouseenter', reveal);
-            }
+                card.classList.add('revealed');
+                card.classList.remove('champion-hidden');
+                celebrateReveal(card);
+                hapticFeedback();
+            };
+            card.addEventListener('click', reveal);
+            card.addEventListener('touchstart', reveal, { passive: false });
+            card.addEventListener('mouseenter', reveal);
 
             podiumContainer.appendChild(card);
         });

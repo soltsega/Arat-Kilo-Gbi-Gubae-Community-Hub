@@ -385,6 +385,12 @@ h1 {
     border-radius: 24px;
 }
 
+.podium-card:hover .blessing-overlay {
+    opacity: 1;
+    visibility: visible;
+    transform: scale(1) rotateX(0);
+}
+
 .podium-card.first.champion-hidden {
     cursor: pointer;
 }
