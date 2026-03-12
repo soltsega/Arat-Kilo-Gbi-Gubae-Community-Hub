@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const searchInput = document.getElementById('searchInput');
     let leaderboardData = [];
     let originalData = [];
-    let currentCSV = null;
+    let currentCSV = '';
 
     // Mobile detection
     const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -279,7 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
         visualOrder.forEach((user, index) => {
             if (!user) return;
             const isFirst = classes[index] === 'first';
-            const isCumulative = currentCSV.includes('AllGospels_Leaderboard');
+            const isCumulative = currentCSV && currentCSV.includes('AllGospels_Leaderboard');
 
             const card = document.createElement('div');
             card.className = `podium-card ${classes[index]} ${isFirst && isCumulative ? 'champion-hidden' : ''} ${isFirst && isCumulative ? 'first-celebrate' : ''}`;

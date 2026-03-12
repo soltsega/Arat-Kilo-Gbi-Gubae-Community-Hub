@@ -468,13 +468,10 @@ h1 {
     font-family: 'Noto Serif Ethiopic', serif;
     font-size: 1.15rem;
     line-height: 1.8;
-    color: var(--text-main);
+    color: #fff;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
     font-weight: 500;
     margin: 1.5rem 0;
-    background: linear-gradient(to bottom, #ffffff, #cbd5e1);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
     position: relative;
     padding: 0 1rem;
 }
@@ -501,11 +498,14 @@ h1 {
 
 .blessing-text small {
     display: block;
-    font-size: 0.9rem;
-    margin-top: 1rem;
-    opacity: 0.8;
+    font-size: 0.95rem;
+    margin-top: 1.5rem;
+    opacity: 0.9;
     font-style: italic;
     color: var(--primary-light);
+    line-height: 1.6;
+    border-top: 1px solid rgba(193, 155, 74, 0.2);
+    padding-top: 1rem;
 }
 
 .sparkle {
