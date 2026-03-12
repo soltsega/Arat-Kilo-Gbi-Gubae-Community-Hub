@@ -578,6 +578,10 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('online', updateOnlineStatus);
     window.addEventListener('offline', updateOnlineStatus);
 
-    // Initialize with data fetch
+    // Initialize with data fetch from the active tab
+    const activeTab = document.querySelector('.tab-btn.active');
+    if (activeTab && activeTab.getAttribute('data-csv')) {
+        currentCSV = activeTab.getAttribute('data-csv');
+    }
     fetchData();
 });
