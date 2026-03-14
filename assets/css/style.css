@@ -15,36 +15,12 @@
     --bronze: #b45309;
     --nav-height: 80px;
 
-    /* Dark mode variables */
+    /* Theme constants (previously dark mode) */
     --bg-primary: #022c22;
     --bg-secondary: #064e3b;
     --bg-tertiary: #0f766e;
     --border-color: rgba(255, 255, 255, 0.1);
     --shadow-color: rgba(0, 0, 0, 0.3);
-}
-
-/* Light mode (default) - Professional Slate Theme */
-[data-theme="light"] {
-    --bg-primary: #f8fafc;
-    --bg-secondary: #f1f5f9;
-    --bg-tertiary: #e2e8f0;
-    --text-main: #0f172a;
-    --text-dim: #475569;
-    --border-color: rgba(15, 23, 42, 0.1);
-    --shadow-color: rgba(15, 23, 42, 0.08);
-    --card-bg: #ffffff;
-}
-
-/* Dark mode */
-[data-theme="dark"] {
-    --bg-primary: #022c22;
-    --bg-secondary: #064e3b;
-    --bg-tertiary: #0f766e;
-    --text-main: #f8fafc;
-    --text-dim: #94a3b8;
-    --border-color: rgba(255, 255, 255, 0.1);
-    --shadow-color: rgba(0, 0, 0, 0.3);
-    --card-bg: rgba(6, 78, 59, 0.4);
 }
 
 * {
@@ -1441,37 +1417,6 @@ tr:hover td {
     transform: translateY(-5px) rotate(15deg);
     box-shadow: 0 8px 20px var(--shadow-color);
     border-color: var(--primary);
-}
-
-.theme-toggle:active {
-    transform: translateY(0) scale(0.95);
-}
-
-.theme-toggle .icon {
-    width: 1.5rem;
-    height: 1.5rem;
-    position: absolute;
-    transition: all 0.5s ease;
-}
-
-[data-theme="light"] .sun-icon {
-    opacity: 0;
-    transform: rotate(90deg) scale(0.5);
-}
-
-[data-theme="light"] .moon-icon {
-    opacity: 1;
-    transform: rotate(0) scale(1);
-}
-
-[data-theme="dark"] .sun-icon {
-    opacity: 1;
-    transform: rotate(0) scale(1);
-}
-
-[data-theme="dark"] .moon-icon {
-    opacity: 0;
-    transform: rotate(-90deg) scale(0.5);
 }
 
 /* Landing Page Specifics */
