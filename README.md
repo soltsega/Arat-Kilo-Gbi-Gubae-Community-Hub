@@ -14,14 +14,14 @@
 
 <img src="assets/img/separator.svg" alt="Separator" width="100%">
 
-## 🌟 Project Overview
+## Project Overview
 The **Arat Kilo Gibi Gubae Community Hub** is a professional digital ecosystem designed to serve the spiritual and academic needs of Orthodox Tewahedo students. Built with a **mobile-first philosophy** and a premium **Glassmorphism UI**, it bridges the gap between campus life and spiritual growth.
 
 <img src="assets/img/separator.svg" alt="Separator" width="100%">
 
-## 🚀 Key Functionalities
+## Key Functionalities
 
-### 🏆 Quiz Mastery & Automated Leaderboard
+### Quiz Mastery & Automated Leaderboard
 A sophisticated engagement system that tracks and rewards spiritual knowledge:
 - **Weighted Scoring Logic (50/25/25)**:
   - **50% Participation**: Consistency is key.
@@ -30,25 +30,25 @@ A sophisticated engagement system that tracks and rewards spiritual knowledge:
 - **Real-Time Podium**: Dynamic celebration of top performers.
 - **Smart Remarks**: Humorous and spiritual feedback tailored to user performance.
 
-### 📚 Integrated Resource Hub
+### Integrated Resource Hub
 Dual-layered repository for holistic growth:
 - **Academic Support**: Subject notes, old examinations, and model papers for Engineering and Natural Sciences.
 - **Spiritual Wisdom**: Gospel summaries (Matthew, Mark, etc.) and Orthodox Tewahedo teachings.
 - **Tabbed Interface**: Seamless switching between academic and spiritual content.
 
-### 🎓 Courses & Certifications
+### Courses & Certifications
 A premium portal for structured spiritual growth:
 - **Curriculum-Based Learning**: Deep dives into scripture and church tradition.
 - **Certification Paths**: Recognizing milestones in spiritual education.
 - **Coming Soon Interface**: Glassmorphism cards with premium animations (በቅርቡ ጠብቁን).
 
-### 💬 Feedback & Review System
+### Feedback & Review System
 Community-driven improvement through a robust feedback loop:
 - **Google Sheets Integration**: Submissions are automatically synced to cloud spreadsheets via apps scripts.
 - **Dynamic Subject Filtering**: Feedback categorized by Bug Reports, Feature Requests, or General Feedback.
 - **Seamless UI**: Native browser validation and success states.
 
-### 📱 Premium PWA & UI
+### Premium PWA & UI
 The hub is more than just a website:
 - **Offline Ready**: Via `manifest.json` and standardized PWA meta tags.
 - **Persistent Dark Mode**: A sophisticated "Deep Green & Gold" aesthetic with a subtle noise background pattern.
@@ -56,7 +56,7 @@ The hub is more than just a website:
 
 <img src="assets/img/separator.svg" alt="Separator" width="100%">
 
-## 🛠️ Technology Stack
+## Technology Stack
 
 | Layer | Technologies |
 | :--- | :--- |
@@ -68,7 +68,7 @@ The hub is more than just a website:
 
 <img src="assets/img/separator.svg" alt="Separator" width="100%">
 
-## 🛰️ Community Connectivity
+## Community Connectivity
 We unify the Orthodox Tewahedo student body across campuses through our digital presence:
 - **Main Telegram**: [@gubaeze4k](https://t.me/gubaeze4k)
 - **Gallery Channel**: [@gallery_ze4k](https://t.me/gallery_ze4k)
@@ -76,7 +76,7 @@ We unify the Orthodox Tewahedo student body across campuses through our digital 
 
 <img src="assets/img/separator.svg" alt="Separator" width="100%">
 
-## ⚙️ Installation & Setup
+## Installation & Setup
 
 ### Local Development
 ```bash
