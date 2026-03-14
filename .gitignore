@@ -54,3 +54,4 @@ post_test.html
 !scripts/generate_combined_rankings.py
 !data/processed/*.csv
 scripts/generate_combined_rankings.py
+WebsiteTestFiles/test_google_sheets.html
