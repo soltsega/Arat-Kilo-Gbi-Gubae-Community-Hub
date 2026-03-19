@@ -48,6 +48,13 @@ Community-driven improvement through a robust feedback loop:
 - **Dynamic Subject Filtering**: Feedback categorized by Bug Reports, Feature Requests, or General Feedback.
 - **Seamless UI**: Native browser validation and success states.
 
+### Bahre Hasab (Calendar Calculator) 📅
+A traditional Ethiopian Orthodox Tewahedo Church calendar tool:
+- **Comprehensive Holiday Calculation**: Automatically computes movable holidays (Nenewe, Easter, etc.) and fixed holidays (Enkutatash, Ledet, Timkat, etc.) for any given year.
+- **Traditional Algorithm**: Implements the authentic Bahre Hasab logic for `Amete Alem`, `Wember`, `Metqe`, and `Mebaja Hamer`.
+- **Smart Date Adjustment**: Handles Ethiopian leap-year effects (such as the shifting of Ledet to Tahsas 28).
+- **Categorized Interface**: Clean separation between fixed and movable calendar events.
+
 ### Premium PWA & UI
 The hub is more than just a website:
 - **Offline Ready**: Via `manifest.json` and standardized PWA meta tags.
@@ -61,7 +68,7 @@ The hub is more than just a website:
 | Layer | Technologies |
 | :--- | :--- |
 | **UI/UX** | Glassmorphism, Vanilla CSS, HSL Theming, SVG Icons |
-| **Frontend** | HTML5, Modern Canvas API, SEO Meta Layer, PWA |
+| **Frontend** | HTML5, Modern Canvas API, Bahre Hasab Algorithm, PWA |
 | **Backend** | Python 3.11, FastAPI (Scoring Engine), Pandas (Data Processing) |
 | **Database** | CSV-to-JSON Pipeline, Google Sheets API (v4) |
 | **DevOps** | Docker, Docker-Compose, Nginx (Reverse Proxy) |
