@@ -70,8 +70,7 @@ const BAHRE_HASAB = {
         let neneweDay = (mebajaHamer > 30) ? (mebajaHamer - 30) : mebajaHamer;
 
         // Base date for offsets (Tir 1)
-        // We use a simple offset from Nenewe for consistency
-        const holidays = [
+        const movableHolidays = [
             { name: 'ጾመ ነነዌ', month: neneweMonth, day: neneweDay, offset: 0 },
             { name: 'ዓቢይ ጾም', offset: 14 },
             { name: 'ደብረ ዘይት', offset: 41 },
@@ -83,28 +82,30 @@ const BAHRE_HASAB = {
             { name: 'ጰራቅሊጦስ', offset: 119 },
             { name: 'ጾመ ሐዋርያት', offset: 120 },
             { name: 'ጾመ ድኅነት', offset: 121 }
-        ];
-
-        // Result calculation helper
-        return holidays.map(h => {
-            if (h.name === 'ጾመ ነነዌ') return { name: h.name, date: `${h.month} ${h.day}` };
-            
-            // Calculate other dates by adding offset to Nenewe
-            // Ethiopian months are 30 days exactly (except Pagume)
-            // Since Nenewe is in Tir/Lekatit, and all these holidays are before/in Hamle,
-            // we can use a simple 30-day month logic.
-            
+        ].map(h => {
+            if (h.name === 'ጾመ ነነዌ') return { name: h.name, date: `${h.month} ${h.day}`, type: 'movable' };
             let totalDays = (neneweMonth === 'ጥር' ? 4 * 30 : 5 * 30) + neneweDay + h.offset;
-            // totalDays is days from Meskerem 1
-            // Convert back to month and day
             let mIdx = Math.floor((totalDays - 1) / 30);
             let d = ((totalDays - 1) % 30) + 1;
-            
-            return {
-                name: h.name,
-                date: `${this.months[mIdx]} ${d}`
-            };
+            return { name: h.name, date: `${this.months[mIdx]} ${d}`, type: 'movable' };
         });
+
+        // Fixed holidays logic
+        const isYohannes = (year % 4 === 0);
+        const ledetDay = isYohannes ? 28 : 29;
+
+        const fixedHolidays = [
+            { name: 'እንቁጣጣሽ (አዲስ ዓመት)', date: 'መስከረም 1' },
+            { name: 'መስቀል', date: 'መስከረም 17' },
+            { name: 'ልደት (ገና)', date: `ታኃሣሥ ${ledetDay}` },
+            { name: 'ጥምቀት', date: 'ጥር 11' },
+            { name: 'ቃና ዘገሊላ', date: 'ጥር 12' },
+            { name: 'ደብረ ታቦር (ቡሄ)', date: 'ነሐሴ 13' },
+            { name: 'ጾመ ፍልሰታ', date: 'ነሐሴ 1 - 15' },
+            { name: 'ፍልሰታ ለማርያም', date: 'ነሐሴ 16' }
+        ].map(h => ({ ...h, type: 'fixed' }));
+
+        return [...fixedHolidays, ...movableHolidays];
     }
 };
 
@@ -118,7 +119,6 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!yearInput || !calculateBtn || !resultsContainer) return;
 
     // Set default year (current Ethiopian year)
-    // Approximate: current Gregorian year - 8 (or 7)
     const now = new Date();
     const estYear = now.getFullYear() - (now.getMonth() < 8 || (now.getMonth() === 8 && now.getDate() < 11) ? 8 : 7);
     yearInput.value = estYear;
@@ -128,20 +128,35 @@ document.addEventListener('DOMContentLoaded', () => {
             const results = BAHRE_HASAB.calculate(parseInt(year));
             resultsContainer.innerHTML = '';
             
-            results.forEach((h, index) => {
-                const card = document.createElement('div');
-                card.className = 'holiday-card';
-                card.style.animationDelay = `${index * 0.05}s`;
-                card.innerHTML = `
-                    <div class="holiday-name">${h.name}</div>
-                    <div class="holiday-date">${h.date}</div>
-                `;
-                resultsContainer.appendChild(card);
-            });
+            // Group by type for better UI
+            const fixed = results.filter(r => r.type === 'fixed');
+            const movable = results.filter(r => r.type === 'movable');
+
+            const renderSection = (title, items) => {
+                const header = document.createElement('h3');
+                header.className = 'section-title-alt';
+                header.textContent = title;
+                resultsContainer.appendChild(header);
+
+                const grid = document.createElement('div');
+                grid.className = 'results-grid';
+                items.forEach((h, index) => {
+                    const card = document.createElement('div');
+                    card.className = `holiday-card ${h.type}`;
+                    card.style.animationDelay = `${index * 0.05}s`;
+                    card.innerHTML = `
+                        <div class="holiday-name">${h.name}</div>
+                        <div class="holiday-date">${h.date}</div>
+                    `;
+                    grid.appendChild(card);
+                });
+                resultsContainer.appendChild(grid);
+            };
+
+            renderSection('ቋሚ በዓላት (Fixed)', fixed);
+            renderSection('ተንቀሳቃሽ በዓላትና አጽዋማት (Movable)', movable);
             
             if (currentYearSpan) currentYearSpan.textContent = year;
-            
-            // Haptic feedback if available
             if ('vibrate' in navigator) navigator.vibrate(50);
             
         } catch (e) {

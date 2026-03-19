@@ -73,6 +73,7 @@
             grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             gap: 1.5rem;
             margin-top: 1rem;
+            margin-bottom: 3rem;
         }
 
         .holiday-card {
@@ -85,6 +86,27 @@
             transition: all 0.3s ease;
             animation: fadeInScale 0.5s ease-out forwards;
             opacity: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .holiday-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--primary);
+            opacity: 0.5;
+        }
+
+        .holiday-card.fixed::after {
+            background: #10b981; /* Green for fixed */
+        }
+
+        .holiday-card.movable::after {
+            background: var(--primary); /* Gold for movable */
         }
 
         .holiday-card:hover {
@@ -93,9 +115,20 @@
             box-shadow: 0 10px 30px var(--shadow-color);
         }
 
+        .section-title-alt {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text-main);
+            margin: 3rem 0 1.5rem;
+            text-align: left;
+            padding-left: 1rem;
+            border-left: 4px solid var(--primary);
+            background: linear-gradient(90deg, rgba(193, 155, 74, 0.1), transparent);
+        }
+
         .holiday-name {
             font-family: 'Noto Serif Ethiopic', serif;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 700;
             color: var(--primary);
             margin-bottom: 0.5rem;
