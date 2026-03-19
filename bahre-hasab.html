@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#022c22">
+    <title>ባህረ ሐሳብ - Arat Kilo Gibi Gubae</title>
+    <link rel="stylesheet" href="assets/css/style.css?v=3.1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+Ethiopic:wght@400;700&family=Outfit:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="manifest" href="manifest.json">
+    <style>
+        .calculator-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            text-align: center;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .input-group input {
+            background: var(--card-bg);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            color: white;
+            font-size: 1.2rem;
+            width: 200px;
+            outline: none;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .input-group input:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 15px rgba(193, 155, 74, 0.2);
+        }
+
+        .btn-calculate {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 12px;
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 5px 15px rgba(193, 155, 74, 0.3);
+        }
+
+        .btn-calculate:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(193, 155, 74, 0.5);
+        }
+
+        .btn-calculate:active {
+            transform: translateY(-1px);
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .holiday-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            animation: fadeInScale 0.5s ease-out forwards;
+            opacity: 0;
+        }
+
+        .holiday-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary);
+            box-shadow: 0 10px 30px var(--shadow-color);
+        }
+
+        .holiday-name {
+            font-family: 'Noto Serif Ethiopic', serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .holiday-date {
+            font-family: 'Noto Serif Ethiopic', serif;
+            font-size: 1.1rem;
+            color: var(--text-main);
+        }
+
+        .year-indicator {
+            font-size: 1.1rem;
+            color: var(--text-dim);
+            margin-bottom: 2rem;
+        }
+
+        .year-indicator span {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        @media (max-width: 600px) {
+            .input-group input {
+                width: 100%;
+            }
+            .btn-calculate {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body data-theme="dark">
+    <div class="background-blur"></div>
+
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo-link">
+                <img src="assets/img/logo.png" alt="Logo" class="logo-img"
+                    onerror="this.src='https://via.placeholder.com/50/c19b4a/ffffff?text=AK'">
+                <span class="brand-name">አራት ኪሎ ግቢ ጉባኤ</span>
+            </a>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="results.html">Results</a></li>
+                <li><a href="resources.html">Resources</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="links.html">Links</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="bahre-hasab.html" class="active">ባህረ ሐሳብ</a></li>
+                <li><a href="contact Us.html">Contact Us</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main id="main" class="container">
+        <header>
+            <h1>ባህረ ሐሳብ</h1>
+            <p class="subtitle">የአጽዋማትና የበዓላት ማውጫ</p>
+        </header>
+
+        <section class="calculator-container">
+            <div class="input-group">
+                <input type="number" id="yearInput" placeholder="ዓመተ ምሕረት" min="1" max="9999">
+                <button id="calculateBtn" class="btn-calculate">አስላ</button>
+            </div>
+
+            <div class="year-indicator">የ <span id="currentYearDisplay"></span> ዓ.ም በዓላትና አጽዋማት</div>
+
+            <div id="resultsContainer" class="results-grid">
+                <!-- Results will be injected here -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Bible Study | Arat Kilo Gibi Gubae</p>
+    </footer>
+
+    <script src="assets/js/script.js?v=3.1"></script>
+    <script src="assets/js/bahre-hasab.js"></script>
+</body>
+
+</html>
