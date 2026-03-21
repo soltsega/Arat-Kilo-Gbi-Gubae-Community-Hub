@@ -133,10 +133,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const movable = results.filter(r => r.type === 'movable');
 
             const renderSection = (title, items) => {
+                const section = document.createElement('div');
+                section.className = 'holiday-section';
+
                 const header = document.createElement('h3');
                 header.className = 'section-title-alt';
                 header.textContent = title;
-                resultsContainer.appendChild(header);
+                section.appendChild(header);
 
                 const grid = document.createElement('div');
                 grid.className = 'results-grid';
@@ -150,7 +153,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     `;
                     grid.appendChild(card);
                 });
-                resultsContainer.appendChild(grid);
+                section.appendChild(grid);
+                resultsContainer.appendChild(section);
             };
 
             renderSection('ቋሚ በዓላት (Fixed)', fixed);

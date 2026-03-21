@@ -68,11 +68,22 @@
             transform: translateY(-1px);
         }
 
+        #resultsContainer {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2.5rem;
+            align-items: flex-start;
+            margin-top: 3rem;
+        }
+
+        .holiday-section {
+            width: 100%;
+        }
+
         .results-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
             gap: 1.5rem;
-            margin-top: 1rem;
             margin-bottom: 3rem;
         }
 
@@ -88,6 +99,10 @@
             opacity: 0;
             position: relative;
             overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 110px;
         }
 
         .holiday-card::after {
@@ -117,18 +132,21 @@
 
         .section-title-alt {
             font-family: 'Outfit', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.4rem;
             color: var(--text-main);
-            margin: 3rem 0 1.5rem;
+            margin: 0 0 1.5rem;
             text-align: left;
             padding-left: 1rem;
             border-left: 4px solid var(--primary);
-            background: linear-gradient(90deg, rgba(193, 155, 74, 0.1), transparent);
+            background: linear-gradient(90deg, rgba(193, 155, 74, 0.15), transparent);
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-radius: 0 8px 8px 0;
         }
 
         .holiday-name {
             font-family: 'Noto Serif Ethiopic', serif;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 700;
             color: var(--primary);
             margin-bottom: 0.5rem;
@@ -136,8 +154,9 @@
 
         .holiday-date {
             font-family: 'Noto Serif Ethiopic', serif;
-            font-size: 1.1rem;
+            font-size: 1.2rem;
             color: var(--text-main);
+            font-weight: 400;
         }
 
         .year-indicator {
@@ -149,6 +168,13 @@
         .year-indicator span {
             color: var(--primary);
             font-weight: 700;
+        }
+
+        @media (max-width: 1024px) {
+            #resultsContainer {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
         }
 
         @media (max-width: 600px) {
@@ -199,7 +225,7 @@
 
             <div class="year-indicator">የ <span id="currentYearDisplay"></span> ዓ.ም በዓላትና አጽዋማት</div>
 
-            <div id="resultsContainer" class="results-grid">
+            <div id="resultsContainer">
                 <!-- Results will be injected here -->
             </div>
         </section>
