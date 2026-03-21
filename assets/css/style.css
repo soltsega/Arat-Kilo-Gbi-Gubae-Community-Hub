@@ -791,6 +791,32 @@ tr:hover td {
     transition: transform 0.4s ease;
 }
 
+/* Vertical Gallery Section */
+.gallery-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.gallery-grid-mini {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+}
+
+.gallery-item.wide {
+    height: 450px;
+    flex: none;
+    width: 100%;
+}
+
+.gallery-grid-mini .gallery-item {
+    flex: none;
+    width: 100%;
+    height: 300px;
+}
+
 .gallery-item:hover {
     transform: translateY(-5px);
     box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
