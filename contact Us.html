@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact Us - Arat Kilo Gibi Gubae</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -76,7 +76,8 @@
                     </div>
                     <div class="contact-content">
                         <h3>Telegram</h3>
-                        <a href="https://t.me/gubaeze4k" target="_blank" class="contact-link">@gubaeze4k</a>
+                        <a href="https://t.me/gubaeze4k" target="_blank" rel="noopener noreferrer"
+                            class="contact-link">@gubaeze4k</a>
                         <span class="contact-label">Community Channel</span>
                     </div>
                 </div>
@@ -91,7 +92,8 @@
                     </div>
                     <div class="contact-content">
                         <h3>Location</h3>
-                        <p><a href="https://maps.app.goo.gl/uQji4xtGEvLBAoFf6" target="_blank" class="contact-link">Arat
+                        <p><a href="https://maps.app.goo.gl/uQji4xtGEvLBAoFf6" target="_blank" rel="noopener noreferrer"
+                                class="contact-link">Arat
                                 Kilo, Addis Ababa</a></p>
                         <span class="contact-label">Physical Location</span>
                     </div>
@@ -141,9 +143,9 @@
                             placeholder="What new features would you like to see? (e.g., new pages, tools, integrations)"></textarea>
                     </div>
 
-                    <div class="form-group">
-                        <label for="experience">Overall Experience</label>
-                        <div class="rating-container">
+                    <fieldset class="form-group experience-group">
+                        <legend>Overall Experience</legend>
+                        <div class="rating-container" role="radiogroup" aria-label="Overall Experience">
                             <div class="rating-options">
                                 <label class="rating-option">
                                     <input type="radio" name="experience" value="excellent">
@@ -163,7 +165,7 @@
                                 </label>
                             </div>
                         </div>
-                    </div>
+                    </fieldset>
 
                     <div class="form-group">
                         <label for="message">Additional Comments</label>
@@ -175,6 +177,8 @@
                         <button type="button" class="btn-secondary" onclick="clearForm()">Clear Form</button>
                         <button type="submit" class="btn-primary">Submit Feedback</button>
                     </div>
+
+                    <div id="formStatus" class="form-status" hidden role="status" aria-live="polite"></div>
                 </form>
 
                 <div id="successMessage" class="success-message" style="display: none;">
@@ -203,16 +207,33 @@
         // Google Sheets configuration
         const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxg4biF5cUzRjThH3Rgl1i34w63gAGQk7AHvJE2sX5MZQvcFkhGgaS9VUVTEZ3ZSoFC/exec'; // You'll need to replace this
 
-        document.getElementById('reviewForm').addEventListener('submit', function (e) {
-            e.preventDefault();
+        const reviewForm = document.getElementById('reviewForm');
+        const submitBtn = reviewForm.querySelector('.btn-primary');
+        const successMessage = document.getElementById('successMessage');
+        const formStatus = document.getElementById('formStatus');
 
-            // Show loading state
-            const submitBtn = document.querySelector('.btn-primary');
+        function setFormStatus(type, message) {
+            formStatus.hidden = false;
+            formStatus.textContent = message;
+            formStatus.className = `form-status is-${type}`;
+        }
+
+        function clearFormStatus() {
+            formStatus.hidden = true;
+            formStatus.textContent = '';
+            formStatus.className = 'form-status';
+        }
+
+        reviewForm.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            clearFormStatus();
+            successMessage.style.display = 'none';
+
             const originalText = submitBtn.textContent;
             submitBtn.textContent = 'Submitting...';
             submitBtn.disabled = true;
+            submitBtn.setAttribute('aria-busy', 'true');
 
-            // Get form data
             const formData = new FormData(this);
             const data = {
                 timestamp: new Date().toISOString(),
@@ -225,42 +246,53 @@
                 message: formData.get('message')
             };
 
-            // Send to Google Sheets
-            fetch(SCRIPT_URL, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            })
-                .then(response => {
-                    // Show success message
-                    document.getElementById('successMessage').style.display = 'block';
-
-                    // Scroll to success message
-                    document.getElementById('successMessage').scrollIntoView({ behavior: 'smooth' });
-
-                    // Clear form after 3 seconds
-                    setTimeout(() => {
-                        clearForm();
-                        document.getElementById('successMessage').style.display = 'none';
-                    }, 3000);
-                })
-                .catch(error => {
-                    // Show error message
-                    alert('There was an error submitting your feedback. Please try again later.');
-                    console.error('Submission error:', error);
-                })
-                .finally(() => {
-                    // Reset button
-                    submitBtn.textContent = originalText;
-                    submitBtn.disabled = false;
+            try {
+                const response = await fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json, text/plain, */*'
+                    },
+                    body: JSON.stringify(data)
                 });
+
+                if (!response.ok) {
+                    throw new Error(`Request failed with status ${response.status}`);
+                }
+
+                const contentType = response.headers.get('content-type') || '';
+                let result = null;
+
+                if (contentType.includes('application/json')) {
+                    result = await response.json();
+                    if (result && result.result && result.result !== 'success') {
+                        throw new Error(result.message || 'The server did not confirm the submission.');
+                    }
+                } else {
+                    result = await response.text();
+                }
+
+                successMessage.style.display = 'block';
+                setFormStatus('success', 'Feedback submitted successfully.');
+                successMessage.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                reviewForm.reset();
+            } catch (error) {
+                console.error('Submission error:', error);
+                setFormStatus(
+                    'error',
+                    'We could not verify your submission. Please try again, or contact us directly on Telegram.'
+                );
+            } finally {
+                submitBtn.textContent = originalText;
+                submitBtn.disabled = false;
+                submitBtn.removeAttribute('aria-busy');
+            }
         });
 
         function clearForm() {
-            document.getElementById('reviewForm').reset();
+            reviewForm.reset();
+            clearFormStatus();
+            successMessage.style.display = 'none';
         }
     </script>
 </body>

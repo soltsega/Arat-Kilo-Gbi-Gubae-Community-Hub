@@ -1219,6 +1219,11 @@ tr:hover td {
     border-color: var(--primary);
 }
 
+.contact-card:focus-within {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(193, 155, 74, 0.18);
+}
+
 .contact-content a {
     color: var(--primary-light);
     text-decoration: none;
@@ -1228,6 +1233,12 @@ tr:hover td {
 
 .contact-content a:hover {
     color: var(--primary);
+    text-decoration: underline;
+}
+
+.contact-content a:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
     text-decoration: underline;
 }
 
@@ -1254,7 +1265,7 @@ tr:hover td {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
+    color: var(--bg-dark);
     flex-shrink: 0;
 }
 
@@ -1328,6 +1339,20 @@ tr:hover td {
 
 .form-group label {
     display: block;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+}
+
+.review-form fieldset {
+    border: 0;
+    padding: 0;
+    margin: 0 0 1.5rem;
+    min-width: 0;
+}
+
+.review-form legend {
     font-size: 1rem;
     font-weight: 600;
     color: var(--text-main);
@@ -1465,6 +1490,41 @@ tr:hover td {
     transform: translateY(-2px);
 }
 
+.review-form .btn-primary:focus-visible,
+.review-form .btn-secondary:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 3px;
+}
+
+.review-form .btn-primary:disabled,
+.review-form .btn-secondary:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.form-status {
+    margin-top: 1rem;
+    padding: 0.9rem 1rem;
+    border-radius: 12px;
+    border: 1px solid transparent;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.form-status.is-success {
+    color: #d1fae5;
+    background: rgba(16, 185, 129, 0.16);
+    border-color: rgba(16, 185, 129, 0.35);
+}
+
+.form-status.is-error {
+    color: #fee2e2;
+    background: rgba(239, 68, 68, 0.14);
+    border-color: rgba(248, 113, 113, 0.35);
+}
+
 /* Success Message */
 .success-message {
     background: linear-gradient(135deg, #10b981 0%, #059669 100%);
@@ -1507,6 +1567,25 @@ tr:hover td {
 .success-content p {
     margin: 0.5rem 0 0 0;
     opacity: 0.9;
+}
+
+@media (max-width: 640px) {
+    .review-form {
+        padding: 1.5rem;
+    }
+
+    .review-form .rating-options {
+        gap: 0.75rem;
+    }
+
+    .review-form .form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .review-form .btn-primary,
+    .review-form .btn-secondary {
+        width: 100%;
+    }
 }
 
 /* Office Hours Section */
