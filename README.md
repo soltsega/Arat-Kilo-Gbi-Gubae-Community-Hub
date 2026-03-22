@@ -1,121 +1,149 @@
-<div align="center">
-  <img src="assets/img/banner.svg" alt="Arat Kilo Gibi Gubae Banner" width="100%">
-  
-  <br>
-  
-  <img src="assets/img/separator.svg" alt="Separator" width="100%">
+# Arat Kilo Gibi Gubae Website
 
-  <p><i>A premium, unified hub for Orthodox Tewahedo students' academic and spiritual journey.</i></p>
+This repository contains the current multi-page website for **Arat Kilo Gibi Gubae**.  
+It is a static front-end site built with **HTML, CSS, and vanilla JavaScript** and focused on Bible study, community communication, quiz results, learning resources, and Orthodox calendar support.
 
-  [![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)](https://github.com/soltsega/Arat-Kilo-Gbi-Gubae-Community-Hub/)
-  [![PWA](https://img.shields.io/badge/PWA-Ready-009639?style=for-the-badge&logo=pwa)](https://web.dev/progressive-web-apps/)
-  [![Deep Green](https://img.shields.io/badge/Theme-Deep_Green-022c22?style=for-the-badge)](https://github.com/soltsega/Arat-Kilo-Gbi-Gubae-Community-Hub/)
-</div>
+## What The Website Currently Does
 
-<img src="assets/img/separator.svg" alt="Separator" width="100%">
+### Home
+- Introduces the community and the purpose of the site.
+- Links users into the main sections of the platform.
+- Highlights gallery content and general community navigation.
 
-## Project Overview
-The **Arat Kilo Gibi Gubae Community Hub** is a professional digital ecosystem designed to serve the spiritual and academic needs of Orthodox Tewahedo students. Built with a **mobile-first philosophy** and a premium **Glassmorphism UI**, it bridges the gap between campus life and spiritual growth.
+### Results Page
+- Displays cumulative Bible study leaderboard views.
+- Uses tabbed navigation to switch between leaderboard datasets.
+- Loads leaderboard data dynamically from CSV files referenced in the page.
+- Shows:
+  - podium/top champions
+  - searchable ranking table
+  - weighted scoring summary
+- Uses shared client-side logic from [`assets/js/script.js`](./assets/js/script.js).
 
-<img src="assets/img/separator.svg" alt="Separator" width="100%">
+### Resources Page
+- Splits content into:
+  - academic support
+  - spiritual resources
+- Includes academic placeholders such as subject notes and old exams.
+- Links directly to Gospel study materials hosted on Google Docs.
+- Tracks chapter/resource links as "read" in the browser using `localStorage`.
 
-## Key Functionalities
+### Links Page
+- Collects important community and church-related links.
+- Includes local community Telegram channels and related external resources.
+- Serves as the quick outbound navigation hub for the wider network.
 
-### Quiz Mastery & Automated Leaderboard
-A sophisticated engagement system that tracks and rewards spiritual knowledge:
-- **Weighted Scoring Logic (50/25/25)**:
-  - **50% Participation**: Consistency is key.
-  - **25% Accuracy**: Precision in knowledge.
-  - **25% Speed**: Mental agility (optimized for sub-50s responses).
-- **Real-Time Podium**: Dynamic celebration of top performers.
-- **Smart Remarks**: Humorous and spiritual feedback tailored to user performance.
+### Gallery Page
+- Displays community images from the local `assets/img` folder.
+- Uses the shared visual system and gallery interactions already present in the site.
 
-### Integrated Resource Hub
-Dual-layered repository for holistic growth:
-- **Academic Support**: Subject notes, old examinations, and model papers for Engineering and Natural Sciences.
-- **Spiritual Wisdom**: Gospel summaries (Matthew, Mark, etc.) and Orthodox Tewahedo teachings.
-- **Tabbed Interface**: Seamless switching between academic and spiritual content.
+### Courses Page
+- Currently acts as a "Coming Soon" page.
+- Presents future courses and certifications as planned features, not active functionality.
 
-### Courses & Certifications
-A premium portal for structured spiritual growth:
-- **Curriculum-Based Learning**: Deep dives into scripture and church tradition.
-- **Certification Paths**: Recognizing milestones in spiritual education.
-- **Coming Soon Interface**: Glassmorphism cards with premium animations (በቅርቡ ጠብቁን).
+### Bahre Hasab Page
+- Provides a client-side Ethiopian Orthodox calendar calculator.
+- Calculates fixed and movable feasts/fasts for a selected Ethiopian year.
+- Uses [`assets/js/bahre-hasab.js`](./assets/js/bahre-hasab.js) for the calendar logic and rendering.
 
-### Feedback & Review System
-Community-driven improvement through a robust feedback loop:
-- **Google Sheets Integration**: Submissions are automatically synced to cloud spreadsheets via apps scripts.
-- **Dynamic Subject Filtering**: Feedback categorized by Bug Reports, Feature Requests, or General Feedback.
-- **Seamless UI**: Native browser validation and success states.
+### Contact Page
+- Shows direct contact options and a feedback form.
+- Supports:
+  - name and email input
+  - subject selection
+  - improvement and feature feedback
+  - experience rating
+  - additional comments
+- Sends submissions to a configured Google Apps Script endpoint.
+- Includes improved inline status messaging and accessibility-focused form updates.
 
-### Bahre Hasab (Calendar Calculator) 📅
-A traditional Ethiopian Orthodox Tewahedo Church calendar tool:
-- **Comprehensive Holiday Calculation**: Automatically computes movable holidays (Nenewe, Easter, etc.) and fixed holidays (Enkutatash, Ledet, Timkat, etc.) for any given year.
-- **Traditional Algorithm**: Implements the authentic Bahre Hasab logic for `Amete Alem`, `Wember`, `Metqe`, and `Mebaja Hamer`.
-- **Smart Date Adjustment**: Handles Ethiopian leap-year effects (such as the shifting of Ledet to Tahsas 28).
-- **Categorized Interface**: Clean separation between fixed and movable calendar events.
+### Shared Footer
+- A shared footer now appears across all pages.
+- Includes:
+  - brand summary
+  - quick links
+  - Telegram/location contact links
+  - YouTube channel links for related Gibi Gubae communities
 
-### Premium PWA & UI
-The hub is more than just a website:
-- **Offline Ready**: Via `manifest.json` and standardized PWA meta tags.
-- **Persistent Dark Mode**: A sophisticated "Deep Green & Gold" aesthetic with a subtle noise background pattern.
-- **Mobile Optimized**: Zero-scaling viewport logic and responsive layouts.
+## Current Front-End Stack
 
-<img src="assets/img/separator.svg" alt="Separator" width="100%">
+- HTML5
+- CSS3
+- Vanilla JavaScript
+- Google Fonts
+- Local image assets in [`assets/img`](./assets/img)
 
-## Technology Stack
+## Repository Structure
 
-| Layer | Technologies |
-| :--- | :--- |
-| **UI/UX** | Glassmorphism, Vanilla CSS, HSL Theming, SVG Icons |
-| **Frontend** | HTML5, Modern Canvas API, Bahre Hasab Algorithm, PWA |
-| **Backend** | Python 3.11, FastAPI (Scoring Engine), Pandas (Data Processing) |
-| **Database** | CSV-to-JSON Pipeline, Google Sheets API (v4) |
-| **DevOps** | Docker, Docker-Compose, Nginx (Reverse Proxy) |
-
-<img src="assets/img/separator.svg" alt="Separator" width="100%">
-
-## Community Connectivity
-We unify the Orthodox Tewahedo student body across campuses through our digital presence:
-- **Main Telegram**: [@gubaeze4k](https://t.me/gubaeze4k)
-- **Gallery Channel**: [@gallery_ze4k](https://t.me/gallery_ze4k)
-- **Official Portal**: Arat Kilo, Amst Kilo, Sidist Kilo, and Saint Peter's hubs.
-
-<img src="assets/img/separator.svg" alt="Separator" width="100%">
-
-## Installation & Setup
-
-### Local Development
-```bash
-# Clone the repository
-git clone "https://github.com/soltsega/Arat-Kilo-Gbi-Gubae-Community-Hub/"
-
-# Initialize Environment
-python -m venv venv
-source venv/bin/activate  # Windows: venv\\Scripts\\activate
-
-# Install Dependencies
-pip install -r requirements.txt
-
-# Start Development Server
-python scripts/generate_rankings.py
-python scripts/main.py
+```text
+.
+|-- assets/
+|   |-- css/
+|   |   `-- style.css
+|   |-- img/
+|   `-- js/
+|       |-- bahre-hasab.js
+|       `-- script.js
+|-- bahre-hasab.html
+|-- contact Us.html
+|-- courses.html
+|-- gallery.html
+|-- index.html
+|-- links.html
+|-- resources.html
+|-- results.html
+`-- README.md
 ```
 
-### Production Deployment
+## Data And Integration Notes
+
+### Leaderboards
+- The results page expects CSV leaderboard files under `data/processed/...`.
+- The shared script fetches those files in the browser at runtime.
+- If those CSV files are missing from deployment, the leaderboard page will not load its ranking data.
+
+### Contact Form
+- The contact form depends on a Google Apps Script URL configured directly in [`contact Us.html`](./contact%20Us.html).
+- The front end now expects a verifiable successful response instead of blindly treating submission as successful.
+- If the Apps Script endpoint is not configured for the current request behavior, users will see an inline error instead of a false success state.
+
+### Manifest / PWA
+- Several pages reference `manifest.json`, but there is currently **no manifest file in the repository root**.
+- That means the site is not fully PWA-complete in its current checked-in state.
+
+## Python Files In The Repo
+
+The repository also includes Python dependencies in [`requirements.txt`](./requirements.txt) and references to scripts in `.gitignore`, but the checked-in website itself is currently a **static front-end experience**.
+
+Based on the files available in this repo right now:
+- the active website is powered primarily by static HTML/CSS/JS
+- Python is not required to view the site pages locally
+- some data preparation or support scripts may exist outside the currently visible checked-in files
+
+## Running The Site Locally
+
+Because this is a static site, the simplest way to run it is with a local static server.
+
+Example with Python:
+
 ```bash
-docker-compose up -d --build
+python -m http.server 8000
 ```
 
-<img src="assets/img/separator.svg" alt="Separator" width="100%">
+Then open:
 
-<div align="center">
-  <p><b>Maintained by Solomon Tsega</b></p>
-  <p><i>Computer Science Student, Addis Ababa University (AAU)</i></p>
-  
-  [![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:tsegasolomon538@gmail.com)
-  [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/solomontsega)
+```text
+http://localhost:8000/
+```
 
-  <br>
-  <p>© 2026 Arat Kilo Gibi Gubae. Academic Excellence & Spiritual Wisdom.</p>
-</div>
+## Known Gaps In The Current Repo State
+
+- Some pages still contain visible text encoding issues for Ethiopic/Amharic content.
+- `manifest.json` is referenced but missing.
+- Some icons referenced by pages may also depend on files not currently present in the repo root or assets.
+- The leaderboard experience depends on CSV assets that are not visible in the current top-level repository listing.
+- The courses section is still a placeholder, not an active course system.
+
+## Maintainer
+
+Maintained by the site owner/community team for Arat Kilo Gibi Gubae.
