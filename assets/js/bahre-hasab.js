@@ -17,6 +17,9 @@ const BAHRE_HASAB = {
         'ዓርብ': 2,
         'ቅዳሜ': 8
     },
+    
+    // Day names for result display
+    dayNames: ['ሰኞ', 'ማክሰኞ', 'ረቡዕ', 'ሐሙስ', 'ዓርብ', 'ቅዳሜ', 'እሁድ'],
 
     // Months in Amharic
     months: [
@@ -66,8 +69,20 @@ const BAHRE_HASAB = {
         const mebajaHamer = metqe + tewsakValue;
 
         // 8. Nenewe (ጾመ ነነዌ)
-        let neneweMonth = (mebajaHamer > 30) ? 'የካቲት' : 'ጥር';
-        let neneweDay = (mebajaHamer > 30) ? (mebajaHamer - 30) : mebajaHamer;
+        let neneweMonth, neneweDay;
+        if (bealeMetqeMonth === 'መስከረም') {
+            if (mebajaHamer > 30) {
+                neneweMonth = 'የካቲት';
+                neneweDay = mebajaHamer - 30;
+            } else {
+                neneweMonth = 'ጥር';
+                neneweDay = mebajaHamer;
+            }
+        } else {
+            // If Beale Metqe is in Tikimt, Nenewe is always in Yekatit
+            neneweMonth = 'የካቲት';
+            neneweDay = mebajaHamer;
+        }
 
         // Base date for offsets (Tir 1)
         const movableHolidays = [
@@ -78,16 +93,32 @@ const BAHRE_HASAB = {
             { name: 'ስቅለት', offset: 67 },
             { name: 'ትንሣኤ', offset: 69 },
             { name: 'ርክበ ካህናት', offset: 93 },
-            { name: 'ዕርገት', offset: 109 },
-            { name: 'ጰራቅሊጦስ', offset: 119 },
-            { name: 'ጾመ ሐዋርያት', offset: 120 },
+            { name: 'ዕርገት', offset: 108 },
+            { name: 'ጰራቅሊጦስ', offset: 118 },
+            { name: 'ጾመ ሐዋርያት', offset: 119 },
             { name: 'ጾመ ድኅነት', offset: 121 }
         ].map(h => {
-            if (h.name === 'ጾመ ነነዌ') return { name: h.name, date: `${h.month} ${h.day}`, type: 'movable' };
-            let totalDays = (neneweMonth === 'ጥር' ? 4 * 30 : 5 * 30) + neneweDay + h.offset;
-            let mIdx = Math.floor((totalDays - 1) / 30);
-            let d = ((totalDays - 1) % 30) + 1;
-            return { name: h.name, date: `${this.months[mIdx]} ${d}`, type: 'movable' };
+            let mIdx, d, dayName;
+            if (h.name === 'ጾመ ነነዌ') {
+                mIdx = this.months.indexOf(h.month);
+                d = h.day;
+            } else {
+                let baseDays = (neneweMonth === 'ጥር' ? 4 * 30 : 5 * 30) + neneweDay;
+                let totalDays = baseDays + h.offset;
+                mIdx = Math.floor((totalDays - 1) / 30);
+                d = ((totalDays - 1) % 30) + 1;
+            }
+            
+            // Calculate day name
+            let totalDaysForWeekday = (mIdx * 30) + d - 1;
+            let dayIdx = (meskerem1DayIdx + totalDaysForWeekday) % 7;
+            dayName = this.dayNames[dayIdx];
+
+            return { 
+                name: h.name, 
+                date: `${this.months[mIdx]} ${d} (${dayName})`, 
+                type: 'movable' 
+            };
         });
 
         // Fixed holidays logic
@@ -97,13 +128,25 @@ const BAHRE_HASAB = {
         const fixedHolidays = [
             { name: 'እንቁጣጣሽ (አዲስ ዓመት)', date: 'መስከረም 1' },
             { name: 'መስቀል', date: 'መስከረም 17' },
-            { name: 'ልደት (ገና)', date: `ታኃሣሥ ${ledetDay}` },
+            { name: 'ልደት (ገና)', date: `ታኅሣሥ ${ledetDay}` },
             { name: 'ጥምቀት', date: 'ጥር 11' },
             { name: 'ቃና ዘገሊላ', date: 'ጥር 12' },
             { name: 'ደብረ ታቦር (ቡሄ)', date: 'ነሐሴ 13' },
             { name: 'ጾመ ፍልሰታ', date: 'ነሐሴ 1 - 15' },
             { name: 'ፍልሰታ ለማርያም', date: 'ነሐሴ 16' }
-        ].map(h => ({ ...h, type: 'fixed' }));
+        ].map(h => {
+            if (h.date.includes('-')) return { ...h, type: 'fixed' }; // Range doesn't get a single day name
+            let [mName, d] = h.date.split(' ');
+            let mIdx = this.months.indexOf(mName);
+            let totalDaysForWeekday = (mIdx * 30) + parseInt(d) - 1;
+            let dayIdx = (meskerem1DayIdx + totalDaysForWeekday) % 7;
+            let dayName = this.dayNames[dayIdx];
+            return { 
+                ...h, 
+                date: `${h.date} (${dayName})`,
+                type: 'fixed' 
+            };
+        });
 
         return [...fixedHolidays, ...movableHolidays];
     }
