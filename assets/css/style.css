@@ -1789,7 +1789,7 @@ footer {
 
 .footer-grid {
     display: grid;
-    grid-template-columns: 1.4fr 1fr 1fr;
+    grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
     gap: 2rem;
 }
 
@@ -1819,7 +1819,8 @@ footer {
 }
 
 .footer-links,
-.footer-contact {
+.footer-contact,
+.footer-media {
     list-style: none;
     display: grid;
     gap: 0.75rem;
