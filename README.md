@@ -177,4 +177,9 @@ http://localhost:8000/
   <p>
     <a href="https://arat-kilo-gibi-gubae-community-hub.vercel.app/index.html">Live Site</a>
   </p>
+
+  <p>
+    <a href="mailto:tsegasolomon538@gmail.com">Email</a> |
+    <a href="https://linkedin.com/in/solomontsega">LinkedIn</a>
+  </p>
 </div>
