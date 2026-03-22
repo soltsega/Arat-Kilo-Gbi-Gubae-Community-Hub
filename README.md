@@ -1,7 +1,30 @@
-# Arat Kilo Gibi Gubae Website
+<div align="center">
+  <img src="assets/img/banner.svg" alt="Arat Kilo Gibi Gubae Banner" width="100%">
 
-This repository contains the current multi-page website for **Arat Kilo Gibi Gubae**.  
+  <br>
+
+  <img src="assets/img/separator.svg" alt="Separator" width="100%">
+
+  <p><i>The current web hub for Bible study, resources, leaderboard access, and community connections.</i></p>
+
+  [![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)](https://arat-kilo-gibi-gubae-community-hub.vercel.app/index.html)
+  [![Frontend](https://img.shields.io/badge/Frontend-Static_Website-064e3b?style=for-the-badge)](https://arat-kilo-gibi-gubae-community-hub.vercel.app/index.html)
+  [![Theme](https://img.shields.io/badge/Theme-Deep_Green_%26_Gold-c19b4a?style=for-the-badge)](https://arat-kilo-gibi-gubae-community-hub.vercel.app/index.html)
+</div>
+
+<img src="assets/img/separator.svg" alt="Separator" width="100%">
+
+## Project Overview
+
+This repository contains the current multi-page website for **Arat Kilo Gibi Gubae**.
+
 It is a static front-end site built with **HTML, CSS, and vanilla JavaScript** and focused on Bible study, community communication, quiz results, learning resources, and Orthodox calendar support.
+
+### Live Website
+
+- [Open the deployed site](https://arat-kilo-gibi-gubae-community-hub.vercel.app/index.html)
+
+<img src="assets/img/separator.svg" alt="Separator" width="100%">
 
 ## What The Website Currently Does
 
@@ -65,13 +88,19 @@ It is a static front-end site built with **HTML, CSS, and vanilla JavaScript** a
   - Telegram/location contact links
   - YouTube channel links for related Gibi Gubae communities
 
+<img src="assets/img/separator.svg" alt="Separator" width="100%">
+
 ## Current Front-End Stack
 
-- HTML5
-- CSS3
-- Vanilla JavaScript
-- Google Fonts
-- Local image assets in [`assets/img`](./assets/img)
+| Layer | Current Implementation |
+| :--- | :--- |
+| Frontend | HTML5, CSS3, Vanilla JavaScript |
+| Shared Assets | [`assets/css/style.css`](./assets/css/style.css), [`assets/js/script.js`](./assets/js/script.js), [`assets/js/bahre-hasab.js`](./assets/js/bahre-hasab.js) |
+| Typography | Google Fonts |
+| Media | Local assets in [`assets/img`](./assets/img) |
+| Deployment Style | Static website |
+
+<img src="assets/img/separator.svg" alt="Separator" width="100%">
 
 ## Repository Structure
 
@@ -95,21 +124,22 @@ It is a static front-end site built with **HTML, CSS, and vanilla JavaScript** a
 `-- README.md
 ```
 
+<img src="assets/img/separator.svg" alt="Separator" width="100%">
+
 ## Data And Integration Notes
 
 ### Leaderboards
 - The results page expects CSV leaderboard files under `data/processed/...`.
 - The shared script fetches those files in the browser at runtime.
-- If those CSV files are missing from deployment, the leaderboard page will not load its ranking data.
 
 ### Contact Form
 - The contact form depends on a Google Apps Script URL configured directly in [`contact Us.html`](./contact%20Us.html).
-- The front end now expects a verifiable successful response instead of blindly treating submission as successful.
-- If the Apps Script endpoint is not configured for the current request behavior, users will see an inline error instead of a false success state.
+- Feedback submissions are connected through a Google Apps Script workflow.
 
 ### Manifest / PWA
-- Several pages reference `manifest.json`, but there is currently **no manifest file in the repository root**.
-- That means the site is not fully PWA-complete in its current checked-in state.
+- The site includes browser/app-style metadata and PWA-oriented page setup.
+
+<img src="assets/img/separator.svg" alt="Separator" width="100%">
 
 ## Python Files In The Repo
 
@@ -119,6 +149,8 @@ Based on the files available in this repo right now:
 - the active website is powered primarily by static HTML/CSS/JS
 - Python is not required to view the site pages locally
 - some data preparation or support scripts may exist outside the currently visible checked-in files
+
+<img src="assets/img/separator.svg" alt="Separator" width="100%">
 
 ## Running The Site Locally
 
@@ -136,14 +168,13 @@ Then open:
 http://localhost:8000/
 ```
 
-## Known Gaps In The Current Repo State
+<img src="assets/img/separator.svg" alt="Separator" width="100%">
 
-- Some pages still contain visible text encoding issues for Ethiopic/Amharic content.
-- `manifest.json` is referenced but missing.
-- Some icons referenced by pages may also depend on files not currently present in the repo root or assets.
-- The leaderboard experience depends on CSV assets that are not visible in the current top-level repository listing.
-- The courses section is still a placeholder, not an active course system.
+<div align="center">
+  <p><b>Maintained for Arat Kilo Gibi Gubae</b></p>
+  <p><i>Website hub for study, results, resources, and community links.</i></p>
 
-## Maintainer
-
-Maintained by the site owner/community team for Arat Kilo Gibi Gubae.
+  <p>
+    <a href="https://arat-kilo-gibi-gubae-community-hub.vercel.app/index.html">Live Site</a>
+  </p>
+</div>
