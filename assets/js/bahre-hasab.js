@@ -34,6 +34,10 @@ const BAHRE_HASAB = {
     calculate: function(year) {
         const ameteAlem = year + 5500;
         
+        // 0. Evangelist (ወንጌላዊ)
+        const evangelists = ['ዮሐንስ', 'ማቴዎስ', 'ማርቆስ', 'ሉቃስ'];
+        const evangelist = evangelists[ameteAlem % 4];
+
         // 1. Day of Meskerem 1
         // Mapping: 0: Monday, 1: Tuesday, 2: Wednesday, 3: Thursday, 4: Friday, 5: Saturday, 6: Sunday
         const meskerem1DayIdx = (ameteAlem + Math.floor(ameteAlem / 4)) % 7;
@@ -131,8 +135,12 @@ const BAHRE_HASAB = {
             { name: 'ልደት (ገና)', date: `ታኅሣሥ ${ledetDay}` },
             { name: 'ጥምቀት', date: 'ጥር 11' },
             { name: 'ቃና ዘገሊላ', date: 'ጥር 12' },
+            { name: 'ልደተ ማርያም (Nativity of Mary)', date: 'ግንቦት 1' },
+            { name: 'ጾመ ጽጌ (Fast of Tsige)', date: 'መስከረም 26' },
+            { name: 'ቁስቋም (Kuskwam)', date: 'ኅዳር 6' },
+            { name: 'ጾመ ነቢያት (Fast of Prophets)', date: 'ኅዳር 15' },
             { name: 'ደብረ ታቦር (ቡሄ)', date: 'ነሐሴ 13' },
-            { name: 'ጾመ ፍልሰታ', date: 'ነሐሴ 1 - 15' },
+            { name: 'ጾመ ፍልሰታ (የፍልሰታ መግቢያ)', date: 'ነሐሴ 1' },
             { name: 'ፍልሰታ ለማርያም', date: 'ነሐሴ 16' }
         ].map(h => {
             if (h.date.includes('-')) return { ...h, type: 'fixed' }; // Range doesn't get a single day name
@@ -148,7 +156,10 @@ const BAHRE_HASAB = {
             };
         });
 
-        return [...fixedHolidays, ...movableHolidays];
+        return {
+            evangelist: evangelist,
+            holidays: [...fixedHolidays, ...movableHolidays]
+        };
     }
 };
 
@@ -168,9 +179,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderResults(year) {
         try {
-            const results = BAHRE_HASAB.calculate(parseInt(year));
+            const data = BAHRE_HASAB.calculate(parseInt(year));
+            const results = data.holidays;
             resultsContainer.innerHTML = '';
             
+            // Display Evangelist
+            const evangelistInfo = document.createElement('div');
+            evangelistInfo.className = 'evangelist-info';
+            evangelistInfo.innerHTML = `የአመቱ ወንጌላዊ፡ <strong>${data.evangelist}</strong>`;
+            resultsContainer.appendChild(evangelistInfo);
+
             // Group by type for better UI
             const fixed = results.filter(r => r.type === 'fixed');
             const movable = results.filter(r => r.type === 'movable');
