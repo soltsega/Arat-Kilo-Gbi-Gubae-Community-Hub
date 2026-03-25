@@ -352,7 +352,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const colors = ['#fbbf24', '#f8fafc', '#10b981', '#c19b4a'];
 
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < 1; i++) {
             setTimeout(() => {
                 const rocket = document.createElement('div');
                 rocket.className = 'rocket';
