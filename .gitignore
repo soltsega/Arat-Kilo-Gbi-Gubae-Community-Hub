@@ -59,3 +59,7 @@ data/processed/Romans_cleaned_leaderboard.csv
 data/raw/Romans.text
 data/processed/Romans_cleaned.txt
 data/processed/Romans_cleaned.csv
+data/raw/FirstCorintians.txt
+data/raw/FirstCorintians.txt.bak
+data/processed/FirstCorintians_cleaned.txt
+data/processed/FirstCorintians_Leaderboard.csv
