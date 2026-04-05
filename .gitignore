@@ -55,11 +55,10 @@ post_test.html
 !data/processed/*.csv
 scripts/generate_combined_rankings.py
 WebsiteTestFiles/test_google_sheets.html
-data/processed/Romans_cleaned_leaderboard.csv
 data/raw/Romans.text
 data/processed/Romans_cleaned.txt
 data/processed/Romans_cleaned.csv
 data/raw/FirstCorintians.txt
 data/raw/FirstCorintians.txt.bak
 data/processed/FirstCorintians_cleaned.txt
-data/processed/FirstCorintians_Leaderboard.csv
+data/processed/Romans_cleaned_leaderboard.csv
