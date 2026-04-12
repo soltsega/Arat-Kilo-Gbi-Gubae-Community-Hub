@@ -71,3 +71,10 @@ yarn-error.log*
 .npm
 package-lock.json
 
+scripts/__pycache__/generate_combined_rankings.cpython-311.pyc
+.gitignore
+data/raw/secondCorinth.txt
+data/raw/Combined_Romans_Corinthians_Raw.txt
+data/raw/Combined_Romans_Corinthians_Raw.txt.bak
+data/raw/secondCorinth.txt.bak
+data/raw/allUntilSecondCorinth.txt
