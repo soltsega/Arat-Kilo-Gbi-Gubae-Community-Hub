@@ -78,3 +78,14 @@ data/raw/Combined_Romans_Corinthians_Raw.txt
 data/raw/Combined_Romans_Corinthians_Raw.txt.bak
 data/raw/secondCorinth.txt.bak
 data/raw/allUntilSecondCorinth.txt
+fvenv/
+backend/routers/__pycache__/resources.cpython-311.pyc
+.gitignore
+backend/__pycache__/database.cpython-311.pyc
+backend/__pycache__/models.cpython-311.pyc
+backend/__pycache__/main.cpython-311.pyc
+backend/__pycache__/__init__.cpython-311.pyc
+backend/routers/__pycache__/__init__.cpython-311.pyc
+backend/routers/__pycache__/links.cpython-311.pyc
+backend/routers/__pycache__/leaderboard.cpython-311.pyc
+backend/routers/__pycache__/contact.cpython-311.pyc
