@@ -14,6 +14,7 @@ import LinksPage from './pages/LinksPage';
 import CoursesPage from './pages/CoursesPage';
 import BahreHasabPage from './pages/BahreHasabPage';
 import ContactPage from './pages/ContactPage';
+import AdminPage from './pages/AdminPage';
 
 export default function App() {
   return (
@@ -29,6 +30,7 @@ export default function App() {
         <Route path="/courses" element={<CoursesPage />} />
         <Route path="/bahre-hasab" element={<BahreHasabPage />} />
         <Route path="/contact" element={<ContactPage />} />
+        <Route path="/admin" element={<AdminPage />} />
       </Routes>
       <Footer />
     </Router>

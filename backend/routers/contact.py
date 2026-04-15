@@ -15,12 +15,14 @@ router = APIRouter(prefix="/api/contact", tags=["contact"])
 class ContactForm(BaseModel):
     """Pydantic model for contact form validation."""
     name: str
-    email: str
+    email: EmailStr
     subject: Optional[str] = None
     improvements: Optional[str] = None
     features: Optional[str] = None
     experience: Optional[str] = None
     message: Optional[str] = None
+    # Hidden field to catch bots. If filled, we discard the message.
+    honeypot: Optional[str] = None
 
 
 class ContactResponse(BaseModel):
@@ -34,8 +36,18 @@ class ContactResponse(BaseModel):
 def submit_contact(form: ContactForm, db: Session = Depends(get_db)):
     """
     Submit a contact/feedback form.
-    Stores the submission in the SQLite database.
+    Stores the submission in the database.
+    Includes honeypot check for spam mitigation.
     """
+    # Honeypot check: Bots usually fill all fields
+    if form.honeypot:
+        # Return success to trick the bot, but don't save anything.
+        return ContactResponse(
+            result="success",
+            message="Thank you for your feedback!",
+            id=0
+        )
+
     try:
         submission = ContactSubmission(
             name=form.name,
@@ -60,34 +72,4 @@ def submit_contact(form: ContactForm, db: Session = Depends(get_db)):
         raise HTTPException(status_code=500, detail=f"Failed to save submission: {str(e)}")
 
 
-@router.get("/submissions")
-def get_submissions(db: Session = Depends(get_db), limit: int = 50, offset: int = 0):
-    """
-    Get all contact submissions (admin use).
-    """
-    submissions = (
-        db.query(ContactSubmission)
-        .order_by(ContactSubmission.created_at.desc())
-        .offset(offset)
-        .limit(limit)
-        .all()
-    )
-    total = db.query(ContactSubmission).count()
-
-    return {
-        "total": total,
-        "data": [
-            {
-                "id": s.id,
-                "name": s.name,
-                "email": s.email,
-                "subject": s.subject,
-                "improvements": s.improvements,
-                "features": s.features,
-                "experience": s.experience,
-                "message": s.message,
-                "created_at": s.created_at.isoformat() if s.created_at else None,
-            }
-            for s in submissions
-        ],
-    }
+# Submissions moved to protected /api/admin/submissions endpoint

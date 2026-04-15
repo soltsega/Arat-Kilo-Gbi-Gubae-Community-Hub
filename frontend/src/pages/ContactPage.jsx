@@ -8,6 +8,7 @@ import { submitContactForm } from '../services/api';
 export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: '', email: '', subject: '', improvements: '', features: '', experience: '', message: '',
+    honeypot: '',
   });
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -36,7 +37,7 @@ export default function ContactPage() {
   };
 
   const clearForm = () => {
-    setFormData({ name: '', email: '', subject: '', improvements: '', features: '', experience: '', message: '' });
+    setFormData({ name: '', email: '', subject: '', improvements: '', features: '', experience: '', message: '', honeypot: '' });
     setError(null);
     setSuccess(false);
   };
@@ -104,6 +105,18 @@ export default function ContactPage() {
                   <label htmlFor="email">Email Address *</label>
                   <input type="email" id="email" name="email" required placeholder="your.email@example.com" value={formData.email} onChange={handleChange} />
                 </div>
+              </div>
+
+              {/* Honeypot field - visually hidden to catch bots */}
+              <div style={{ display: 'none' }} aria-hidden="true">
+                <input 
+                  type="text" 
+                  name="honeypot" 
+                  tabIndex="-1" 
+                  autoComplete="off" 
+                  value={formData.honeypot} 
+                  onChange={handleChange} 
+                />
               </div>
 
               <div className="form-group">

@@ -8,7 +8,7 @@ from fastapi.staticfiles import StaticFiles
 import os
 
 from .database import init_db
-from .routers import leaderboard, contact, resources, links
+from .routers import leaderboard, contact, resources, links, admin
 
 # Initialize FastAPI app
 app = FastAPI(
@@ -40,6 +40,7 @@ app.include_router(leaderboard.router)
 app.include_router(contact.router)
 app.include_router(resources.router)
 app.include_router(links.router)
+app.include_router(admin.router)
 
 # Serve static images from the data directory (saint icons)
 DATA_DIR = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data")
