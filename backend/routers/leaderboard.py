@@ -9,8 +9,28 @@ import os
 router = APIRouter(prefix="/api/leaderboard", tags=["leaderboard"])
 
 # Path to data directory (relative to project root)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-DATA_DIR = os.path.join(BASE_DIR, "data", "processed")
+# In Vercel, the whole project root is usually the base.
+# In local dev, we are in backend/routers/
+current_dir = os.path.dirname(os.path.abspath(__file__))
+# Try going up to find 'data' folder
+# Option 1: ../../data (if in backend/routers/)
+# Option 2: ../data (if in backend/)
+# Option 3: data (if in root)
+DATA_DIR = None
+search_paths = [
+    os.path.join(current_dir, "..", "..", "data", "processed"),
+    os.path.join(current_dir, "..", "data", "processed"),
+    os.path.join(current_dir, "data", "processed"),
+]
+
+for path in search_paths:
+    if os.path.exists(path):
+        DATA_DIR = path
+        break
+
+if not DATA_DIR:
+    # Fallback to the most likely one to avoid crashes during startup
+    DATA_DIR = os.path.join(current_dir, "..", "..", "data", "processed")
 
 # Mapping of tab keys to CSV filenames
 LEADERBOARD_MAP = {
