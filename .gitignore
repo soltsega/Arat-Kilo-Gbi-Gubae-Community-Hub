@@ -71,21 +71,16 @@ yarn-error.log*
 .npm
 package-lock.json
 
-scripts/__pycache__/generate_combined_rankings.cpython-311.pyc
-.gitignore
-data/raw/secondCorinth.txt
-data/raw/Combined_Romans_Corinthians_Raw.txt
-data/raw/Combined_Romans_Corinthians_Raw.txt.bak
-data/raw/secondCorinth.txt.bak
-data/raw/allUntilSecondCorinth.txt
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Local folders
 fvenv/
-backend/routers/__pycache__/resources.cpython-311.pyc
-.gitignore
-backend/__pycache__/database.cpython-311.pyc
-backend/__pycache__/models.cpython-311.pyc
-backend/__pycache__/main.cpython-311.pyc
-backend/__pycache__/__init__.cpython-311.pyc
-backend/routers/__pycache__/__init__.cpython-311.pyc
-backend/routers/__pycache__/links.cpython-311.pyc
-backend/routers/__pycache__/leaderboard.cpython-311.pyc
-backend/routers/__pycache__/contact.cpython-311.pyc
+data/raw/
+frontend/.gitignore
