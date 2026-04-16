@@ -33,6 +33,7 @@ export default function Footer() {
               <li><Link to="/links">Links</Link></li>
               <li><Link to="/courses">Courses</Link></li>
               <li><Link to="/contact">Contact Us</Link></li>
+              <li><Link to="/admin" style={{ opacity: 0.5, fontSize: '0.8rem' }}>Admin Login</Link></li>
             </ul>
           </div>
 

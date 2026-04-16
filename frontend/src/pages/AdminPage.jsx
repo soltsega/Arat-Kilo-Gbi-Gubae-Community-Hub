@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 
 /**
  * Admin Dashboard — Protected view for contact submissions.
- * Requires a "Secret Token" (password) to fetch data from /api/admin/submissions.
+ * Optimized with dedicated CSS classes and professional layout.
  */
 export default function AdminPage() {
   const [token, setToken] = useState(localStorage.getItem('adminToken') || '');
@@ -34,6 +34,7 @@ export default function AdminPage() {
     } catch (err) {
       setError(err.message);
       setIsAuthorized(false);
+      localStorage.removeItem('adminToken');
     } finally {
       setLoading(false);
     }
@@ -68,26 +69,30 @@ export default function AdminPage() {
           </div>
         </header>
         <main className="container">
-          <div className="coming-soon-card" style={{ maxWidth: '500px', margin: '2rem auto' }}>
-            <span className="coming-soon-icon">🔐</span>
-            <h2 className="coming-soon-title">Authentication Required</h2>
-            <form onSubmit={handleLogin} style={{ marginTop: '1.5rem' }}>
+          <div className="admin-card" style={{ maxWidth: '450px' }}>
+            <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+              <span className="coming-soon-icon">🔐</span>
+              <h2 className="coming-soon-title" style={{ fontSize: '2rem' }}>Authentication</h2>
+              <p style={{ color: 'var(--text-dim)', marginTop: '0.5rem' }}>Enter your secret token to proceed</p>
+            </div>
+
+            <form onSubmit={handleLogin}>
               <div className="form-group">
                 <input 
                   type="password" 
-                  placeholder="Enter Secret Admin Token" 
-                  className="input-group"
-                  style={{ width: '100%', marginBottom: '1rem', padding: '1rem', borderRadius: '12px' }}
+                  placeholder="Secret Admin Token" 
+                  className="admin-token-input"
                   value={inputToken}
                   onChange={(e) => setInputToken(e.target.value)}
                   required
+                  autoFocus
                 />
               </div>
-              <button type="submit" className="cta-placeholder" style={{ border: 'none', cursor: 'pointer', width: '100%', justifyContent: 'center' }}>
+              <button type="submit" className="cta-placeholder" style={{ width: '100%', justifyContent: 'center', border: 'none', cursor: 'pointer' }}>
                 Verify Access
               </button>
             </form>
-            {error && <p style={{ color: '#ff4d4d', marginTop: '1rem' }}>{error}</p>}
+            {error && <p style={{ color: '#ff4d4d', marginTop: '1.5rem', textAlign: 'center', fontWeight: 'bold' }}>{error}</p>}
           </div>
         </main>
       </div>
@@ -97,68 +102,66 @@ export default function AdminPage() {
   return (
     <div className="admin-dashboard">
       <header>
-        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <div className="container admin-header">
           <div>
             <h1>Admin Dashboard</h1>
-            <p className="subtitle">Total Submissions: {submissions.length}</p>
+            <p className="subtitle">Managing {submissions.length} submissions</p>
           </div>
-          <button onClick={handleLogout} className="btn-secondary" style={{ padding: '0.5rem 1rem' }}>Logout</button>
+          <button onClick={handleLogout} className="btn-secondary" style={{ padding: '0.6rem 1.2rem' }}>Logout</button>
         </div>
       </header>
 
       <main className="container">
-        <div className="coming-soon-card" style={{ padding: '2rem', textAlign: 'left', maxWidth: 'none' }}>
+        <div className="admin-table-container">
           {loading ? (
-            <div style={{ textAlign: 'center', padding: '3rem' }}>
-              <p>Loading submissions...</p>
+            <div style={{ textAlign: 'center', padding: '5rem' }}>
+              <p>Fetching encrypted submissions...</p>
             </div>
           ) : (
             <div className="table-wrapper" style={{ overflowX: 'auto' }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', color: 'var(--text-light)' }}>
+              <table className="admin-table">
                 <thead>
-                  <tr style={{ borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
-                    <th style={{ padding: '12px', textAlign: 'left' }}>Date</th>
-                    <th style={{ padding: '12px', textAlign: 'left' }}>Name</th>
-                    <th style={{ padding: '12px', textAlign: 'left' }}>Email</th>
-                    <th style={{ padding: '12px', textAlign: 'left' }}>Subject</th>
-                    <th style={{ padding: '12px', textAlign: 'left' }}>Message</th>
+                  <tr>
+                    <th>Date</th>
+                    <th>Requester</th>
+                    <th>Email</th>
+                    <th>Category</th>
+                    <th>Message & Feedback</th>
                   </tr>
                 </thead>
                 <tbody>
                   {submissions.map((s) => (
-                    <tr key={s.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
-                      <td style={{ padding: '12px', fontSize: '0.9rem', color: 'var(--text-dim)' }}>
+                    <tr key={s.id}>
+                      <td style={{ color: 'var(--text-dim)', whiteSpace: 'nowrap' }}>
                         {new Date(s.created_at).toLocaleDateString()}
                       </td>
-                      <td style={{ padding: '12px', fontWeight: '600' }}>{s.name}</td>
-                      <td style={{ padding: '12px', color: 'var(--primary-light)' }}>{s.email}</td>
-                      <td style={{ padding: '12px' }}>
+                      <td style={{ fontWeight: '600' }}>{s.name}</td>
+                      <td style={{ color: 'var(--primary-light)' }}>{s.email}</td>
+                      <td>
                         <span style={{ 
-                          padding: '4px 8px', 
-                          borderRadius: '4px', 
-                          background: 'rgba(193, 155, 74, 0.2)', 
-                          fontSize: '0.8rem',
-                          color: 'var(--primary)'
+                          padding: '4px 10px', 
+                          borderRadius: '20px', 
+                          background: 'rgba(193, 155, 74, 0.15)', 
+                          fontSize: '0.75rem',
+                          color: 'var(--primary)',
+                          fontWeight: 'bold',
+                          textTransform: 'uppercase'
                         }}>
                           {s.subject || 'General'}
                         </span>
                       </td>
-                      <td style={{ padding: '12px', maxWidth: '300px' }}>
-                        <div style={{ 
-                          maxHeight: '60px', 
-                          overflowY: 'auto', 
-                          fontSize: '0.9rem',
-                          lineHeight: '1.4'
-                        }}>
-                          {s.message}
+                      <td>
+                        <div className="message-preview">
+                          {s.message || s.improvements || s.features || <span style={{ fontStyle: 'italic', opacity: 0.5 }}>No content</span>}
                         </div>
                       </td>
                     </tr>
                   ))}
                   {submissions.length === 0 && (
                     <tr>
-                      <td colSpan="5" style={{ padding: '3rem', textAlign: 'center', color: 'var(--text-dim)' }}>
-                        No submissions found.
+                      <td colSpan="5" style={{ padding: '5rem', textAlign: 'center', color: 'var(--text-dim)' }}>
+                        <div style={{ fontSize: '3rem', marginBottom: '1rem' }}>📥</div>
+                        No feedback submissions found yet.
                       </td>
                     </tr>
                   )}

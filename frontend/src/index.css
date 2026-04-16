@@ -3096,3 +3096,100 @@ footer {
     opacity: 0.4;
     color: var(--primary);
 }
+
+/* --- Admin Dashboard Styles --- */
+.admin-login-container {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.admin-card {
+    background: rgba(6, 78, 59, 0.4);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 2.5rem;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    margin: 2rem auto;
+    width: 100%;
+    animation: fadeInScale 0.6s ease-out;
+}
+
+.admin-table-container {
+    background: rgba(6, 78, 59, 0.2);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-top: 1.5rem;
+}
+
+.admin-table {
+    width: 100%;
+    border-collapse: collapse;
+    color: var(--text-light);
+}
+
+.admin-table th {
+    background: rgba(193, 155, 74, 0.1);
+    color: var(--primary);
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.admin-table td {
+    padding: 1rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 0.95rem;
+}
+
+.admin-table tr:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.admin-token-input {
+    background: rgba(2, 44, 34, 0.6) !important;
+    border: 1px solid rgba(193, 155, 74, 0.3) !important;
+    color: white !important;
+    width: 100%;
+    padding: 1rem !important;
+    border-radius: 12px !important;
+    margin-bottom: 1.5rem;
+    font-size: 1rem;
+}
+
+.admin-token-input:focus {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 2px rgba(193, 155, 74, 0.2);
+}
+
+.admin-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.message-preview {
+    max-height: 80px;
+    overflow-y: auto;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    color: var(--text-dim);
+    padding-right: 8px;
+}
+
+.message-preview::-webkit-scrollbar {
+    width: 4px;
+}
+
+.message-preview::-webkit-scrollbar-thumb {
+    background: rgba(193, 155, 74, 0.3);
+    border-radius: 10px;
+}
