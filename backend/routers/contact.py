@@ -39,6 +39,7 @@ def submit_contact(form: ContactForm, db: Session = Depends(get_db)):
     Stores the submission in the database.
     Includes honeypot check for spam mitigation.
     """
+    print(f"DEBUG: Received contact form from {form.email}")
     # Honeypot check: Bots usually fill all fields
     if form.honeypot:
         # Return success to trick the bot, but don't save anything.

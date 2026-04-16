@@ -30,7 +30,9 @@ export default function ContactPage() {
       setSuccess(true);
       setFormData({ name: '', email: '', subject: '', improvements: '', features: '', experience: '', message: '' });
     } catch (err) {
-      setError('We could not verify your submission. Please try again, or contact us directly on Telegram.');
+      // Show the actual error message from the backend if available
+      const msg = err.message || 'We could not verify your submission.';
+      setError(`Submission Failed: ${msg}. Please check your information and try again.`);
     } finally {
       setSubmitting(false);
     }
@@ -108,7 +110,7 @@ export default function ContactPage() {
               </div>
 
               {/* Honeypot field - visually hidden to catch bots */}
-              <div style={{ display: 'none' }} aria-hidden="true">
+              <div style={{ opacity: 0, position: 'absolute', top: 0, left: 0, height: 0, width: 0, zIndex: -1, pointerEvents: 'none' }} aria-hidden="true">
                 <input 
                   type="text" 
                   name="honeypot" 
