@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getSpiritualResources, getAcademicResources } from '../services/api';
+import { getSpiritualResources, getAcademicResources, getSpiritualQuestions } from '../services/api';
 
 /**
  * Resources page — Academic/Spiritual tabs with gospel chapter cards.
@@ -8,11 +8,13 @@ import { getSpiritualResources, getAcademicResources } from '../services/api';
 export default function ResourcesPage() {
   const [activeTab, setActiveTab] = useState('academic');
   const [spiritualData, setSpiritualData] = useState([]);
+  const [spiritualQuestions, setSpiritualQuestions] = useState([]);
   const [academicData, setAcademicData] = useState([]);
   const [readChapters, setReadChapters] = useState({});
 
   useEffect(() => {
     getSpiritualResources().then(setSpiritualData).catch(console.error);
+    getSpiritualQuestions().then(setSpiritualQuestions).catch(console.error);
     getAcademicResources().then(setAcademicData).catch(console.error);
 
     // Load read tracking from localStorage
@@ -114,6 +116,57 @@ export default function ResourcesPage() {
                     )}
                   </div>
                 ))}
+              </div>
+
+              <div className="spiritual-qa-section" style={{ marginTop: '4rem' }}>
+                <h2 className="section-title">Spiritual questions asked and their answers</h2>
+                <p className="section-subtitle" style={{ textAlign: 'center', color: 'var(--text-dim)', marginBottom: '2rem' }}>
+                  Select a book to explore questions and answers
+                </p>
+                <div className="qa-books-grid" style={{ 
+                  display: 'grid', 
+                  gridTemplateColumns: 'repeat(auto-fill, minmax(160px, 1fr))', 
+                  gap: '1rem',
+                  marginTop: '2rem'
+                }}>
+                  {spiritualQuestions.map((book) => (
+                    <button
+                      key={book.id}
+                      className={`qa-book-btn ${book.available ? 'available' : 'coming-soon'}`}
+                      disabled={!book.available}
+                      style={{
+                        padding: '1.2rem',
+                        borderRadius: '12px',
+                        background: 'var(--card-bg)',
+                        border: '1px solid var(--border-color)',
+                        color: 'var(--text-main)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        gap: '0.4rem',
+                        cursor: book.available ? 'pointer' : 'not-allowed',
+                        opacity: book.available ? 1 : 0.6,
+                        transition: 'all 0.3s ease',
+                        position: 'relative'
+                      }}
+                    >
+                      <span className="book-title" style={{ fontWeight: '700', fontSize: '1.1rem' }}>{book.title}</span>
+                      <span className="book-english" style={{ fontSize: '0.8rem', color: 'var(--text-dim)' }}>{book.english}</span>
+                      {!book.available && (
+                        <span className="badge" style={{ 
+                          position: 'absolute', 
+                          top: '5px', 
+                          right: '5px', 
+                          fontSize: '0.6rem', 
+                          background: 'var(--primary)', 
+                          padding: '2px 6px', 
+                          borderRadius: '4px',
+                          color: '#fff'
+                        }}>Soon</span>
+                      )}
+                    </button>
+                  ))}
+                </div>
               </div>
             </section>
           </div>

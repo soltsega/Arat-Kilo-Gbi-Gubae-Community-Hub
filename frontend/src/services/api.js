@@ -54,6 +54,10 @@ export async function getSpiritualResources() {
   return apiFetch('/resources/spiritual');
 }
 
+export async function getSpiritualQuestions() {
+  return apiFetch('/resources/questions');
+}
+
 export async function getAcademicResources() {
   return apiFetch('/resources/academic');
 }

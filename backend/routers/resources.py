@@ -95,6 +95,36 @@ SPIRITUAL_RESOURCES = [
     },
 ]
 
+SPIRITUAL_QUESTIONS = [
+    {"id": 1, "title": "ማቴዎስ", "english": "Matthew", "available": False},
+    {"id": 2, "title": "ማርቆስ", "english": "Mark", "available": False},
+    {"id": 3, "title": "ሉቃስ", "english": "Luke", "available": False},
+    {"id": 4, "title": "ዮሐንስ", "english": "John", "available": False},
+    {"id": 5, "title": "የሐዋርያት ሥራ", "english": "Acts", "available": False},
+    {"id": 6, "title": "ሮሜ", "english": "Romans", "available": False},
+    {"id": 7, "title": "1ኛ ቆሮንቶስ", "english": "1 Corinthians", "available": False},
+    {"id": 8, "title": "2ኛ ቆሮንቶስ", "english": "2 Corinthians", "available": False},
+    {"id": 9, "title": "ገላትያ", "english": "Galatians", "available": False},
+    {"id": 10, "title": "ኤፌሶን", "english": "Ephesians", "available": False},
+    {"id": 11, "title": "ፊልጵስዩስ", "english": "Philippians", "available": False},
+    {"id": 12, "title": "ቆላስይስ", "english": "Colossians", "available": False},
+    {"id": 13, "title": "1ኛ ተሰሎንቄ", "english": "1 Thessalonians", "available": False},
+    {"id": 14, "title": "2ኛ ተሰሎንቄ", "english": "2 Thessalonians", "available": False},
+    {"id": 15, "title": "1ኛ ጢሞቴዎስ", "english": "1 Timothy", "available": False},
+    {"id": 16, "title": "2ኛ ጢሞቴዎስ", "english": "2 Timothy", "available": False},
+    {"id": 17, "title": "ቲቶ", "english": "Titus", "available": False},
+    {"id": 18, "title": "ፊልሞና", "english": "Philemon", "available": False},
+    {"id": 19, "title": "ዕብራውያን", "english": "Hebrews", "available": False},
+    {"id": 20, "title": "ያዕቆብ", "english": "James", "available": False},
+    {"id": 21, "title": "1ኛ ጴጥሮስ", "english": "1 Peter", "available": False},
+    {"id": 22, "title": "2ኛ ጴጥሮስ", "english": "2 Peter", "available": False},
+    {"id": 23, "title": "1ኛ ዮሐንስ", "english": "1 John", "available": False},
+    {"id": 24, "title": "2ኛ ዮሐንስ", "english": "2 John", "available": False},
+    {"id": 25, "title": "3ኛ ዮሐንስ", "english": "3 John", "available": False},
+    {"id": 26, "title": "ይሁዳ", "english": "Jude", "available": False},
+    {"id": 27, "title": "ራእይ", "english": "Revelation", "available": False},
+]
+
 ACADEMIC_RESOURCES = [
     {
         "id": "notes",
@@ -117,6 +147,12 @@ ACADEMIC_RESOURCES = [
 def get_spiritual_resources():
     """Return spiritual resources (gospel chapter links)."""
     return SPIRITUAL_RESOURCES
+
+
+@router.get("/questions")
+def get_spiritual_questions():
+    """Return list of books for spiritual questions and answers."""
+    return SPIRITUAL_QUESTIONS
 
 
 @router.get("/academic")
