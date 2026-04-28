@@ -519,6 +519,112 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('online', updateOnlineStatus);
     window.addEventListener('offline', updateOnlineStatus);
 
+    // Acts Q&A Accordion Logic
+    async function initActsQa() {
+        const container = document.getElementById('actsQaContainer');
+        if (!container) return;
+
+        try {
+            const response = await fetch('data/acts_qa.json');
+            if (!response.ok) throw new Error('Q&A data not found');
+            const data = await response.json();
+            
+            renderActsQa(data);
+        } catch (error) {
+            console.error('Acts Q&A load failed:', error);
+            showError(container, 'ለጊዜው ጥያቄና መልሶቹን መጫን አልተቻለም። እባክዎ ቆይተው እንደገና ይሞክሩ።');
+        }
+    }
+
+    function renderActsQa(data) {
+        const container = document.getElementById('actsQaContainer');
+        if (!container) return;
+        
+        container.innerHTML = '';
+        
+        data.forEach((chapter, index) => {
+            const chapterDiv = document.createElement('div');
+            chapterDiv.className = 'qa-chapter';
+            
+            const chapterId = `chapter-${index}`;
+            const qaCount = chapter.qa.length;
+            
+            chapterDiv.innerHTML = `
+                <div class="qa-chapter-header" data-chapter="${chapterId}">
+                    <div class="qa-chapter-title">
+                        <span class="chapter-num">${index + 1}</span>
+                        ${chapter.title}
+                    </div>
+                    <div class="qa-chapter-meta">
+                        <span class="qa-count-badge">${qaCount} ጥያቄዎች</span>
+                        <i class="fas fa-chevron-down qa-chevron"></i>
+                    </div>
+                </div>
+                <div class="qa-chapter-body" id="${chapterId}">
+                    <div class="qa-questions-list">
+                        ${chapter.qa.map((qa, qIndex) => `
+                            <div class="qa-item">
+                                <div class="qa-question">
+                                    <span class="qa-q-icon">?</span>
+                                    <div class="qa-q-text">${qa.question}</div>
+                                    <i class="fas fa-plus qa-toggle"></i>
+                                </div>
+                                <div class="qa-answer">
+                                    <div class="qa-answer-inner">
+                                        <div class="qa-a-text">${qa.answer}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            // Toggle Chapter
+            const header = chapterDiv.querySelector('.qa-chapter-header');
+            header.addEventListener('click', () => {
+                const isActive = chapterDiv.classList.contains('active');
+                
+                // Optional: Close other chapters
+                // document.querySelectorAll('.qa-chapter.active').forEach(c => c.classList.remove('active'));
+                
+                if (isActive) {
+                    chapterDiv.classList.remove('active');
+                } else {
+                    chapterDiv.classList.add('active');
+                    hapticFeedback();
+                }
+            });
+            
+            // Toggle Questions
+            const items = chapterDiv.querySelectorAll('.qa-item');
+            items.forEach(item => {
+                const question = item.querySelector('.qa-question');
+                question.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const isActive = item.classList.contains('active');
+                    
+                    // Close other questions in this chapter
+                    chapterDiv.querySelectorAll('.qa-item.active').forEach(i => {
+                        if (i !== item) i.classList.remove('active');
+                    });
+                    
+                    if (isActive) {
+                        item.classList.remove('active');
+                    } else {
+                        item.classList.add('active');
+                        hapticFeedback();
+                    }
+                });
+            });
+            
+            container.appendChild(chapterDiv);
+        });
+    }
+
+    // Initialize Acts Q&A
+    initActsQa();
+
     // Initialize with data fetch from the active tab
     const activeTab = document.querySelector('.tab-btn.active');
     if (activeTab && activeTab.getAttribute('data-csv')) {
@@ -526,3 +632,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     fetchData();
 });
+

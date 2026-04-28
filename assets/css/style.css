@@ -2791,3 +2791,297 @@ footer {
     margin-top: 1rem;
     border: 1px dashed var(--border-color);
 }
+
+
+/* =============================================
+   Acts Q&A Accordion Styles
+   ============================================= */
+
+.acts-qa-card {
+    border-color: rgba(193, 155, 74, 0.4) !important;
+    background: linear-gradient(135deg, rgba(6, 78, 59, 0.6), rgba(193, 155, 74, 0.1)) !important;
+}
+
+.qa-subtitle {
+    font-family: 'Noto Serif Ethiopic', serif;
+    color: var(--primary-light);
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+    opacity: 0.8;
+}
+
+.qa-section {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+}
+
+.qa-section-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.qa-section-header h2 {
+    font-family: 'Noto Serif Ethiopic', serif;
+    font-size: 1.6rem;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+}
+
+.qa-icon {
+    font-style: normal;
+    margin-right: 0.5rem;
+}
+
+.qa-intro {
+    font-family: 'Noto Serif Ethiopic', serif;
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.qa-accordion-container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+/* Chapter Accordion */
+.qa-chapter {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.qa-chapter:hover {
+    border-color: rgba(193, 155, 74, 0.3);
+}
+
+.qa-chapter.active {
+    border-color: rgba(193, 155, 74, 0.5);
+    box-shadow: 0 4px 20px rgba(193, 155, 74, 0.1);
+}
+
+.qa-chapter-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1.25rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.3s ease;
+    gap: 1rem;
+}
+
+.qa-chapter-header:hover {
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.qa-chapter-title {
+    font-family: 'Noto Serif Ethiopic', serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.qa-chapter-title .chapter-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: #022c22;
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+
+.qa-chapter-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-shrink: 0;
+}
+
+.qa-count-badge {
+    font-size: 0.75rem;
+    color: var(--text-dim);
+    background: rgba(255, 255, 255, 0.05);
+    padding: 0.2rem 0.6rem;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+.qa-chevron {
+    font-size: 0.9rem;
+    color: var(--primary);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
+
+.qa-chapter.active .qa-chevron {
+    transform: rotate(180deg);
+}
+
+/* Questions inside a chapter */
+.qa-chapter-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+}
+
+.qa-chapter.active .qa-chapter-body {
+    max-height: 5000px;
+    transition: max-height 0.6s ease;
+}
+
+.qa-questions-list {
+    padding: 0 1rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Individual Q&A Item */
+.qa-item {
+    background: rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.qa-item:hover {
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+.qa-item.active {
+    border-color: rgba(16, 185, 129, 0.3);
+    background: rgba(16, 185, 129, 0.05);
+}
+
+.qa-question {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.85rem 1rem;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s ease;
+}
+
+.qa-question:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.qa-q-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 24px;
+    height: 24px;
+    border-radius: 6px;
+    background: rgba(16, 185, 129, 0.15);
+    color: var(--accent);
+    font-size: 0.7rem;
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.qa-item.active .qa-q-icon {
+    background: rgba(16, 185, 129, 0.3);
+}
+
+.qa-q-text {
+    font-family: 'Noto Serif Ethiopic', serif;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--text-main);
+    flex: 1;
+}
+
+.qa-toggle {
+    color: var(--accent);
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+    margin-top: 2px;
+}
+
+.qa-item.active .qa-toggle {
+    transform: rotate(45deg);
+}
+
+/* Answer */
+.qa-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease, padding 0.35s ease;
+}
+
+.qa-item.active .qa-answer {
+    max-height: 1000px;
+}
+
+.qa-answer-inner {
+    padding: 0 1rem 1rem 3.5rem;
+}
+
+.qa-a-text {
+    font-family: 'Noto Serif Ethiopic', serif;
+    font-size: 0.88rem;
+    line-height: 1.8;
+    color: var(--text-dim);
+    position: relative;
+    padding-left: 1rem;
+    border-left: 3px solid var(--accent);
+    animation: fadeInAnswer 0.3s ease;
+}
+
+@keyframes fadeInAnswer {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .qa-section-header h2 {
+        font-size: 1.3rem;
+    }
+
+    .qa-chapter-header {
+        padding: 0.85rem 1rem;
+    }
+
+    .qa-chapter-title {
+        font-size: 0.95rem;
+    }
+
+    .qa-q-text {
+        font-size: 0.85rem;
+    }
+
+    .qa-a-text {
+        font-size: 0.83rem;
+        padding-left: 0.75rem;
+    }
+
+    .qa-answer-inner {
+        padding: 0 0.75rem 0.75rem 2.5rem;
+    }
+}
+

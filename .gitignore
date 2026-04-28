@@ -84,3 +84,4 @@ htmlcov/
 fvenv/
 data/raw/
 frontend/.gitignore
+docs/Acts_QA.txt
