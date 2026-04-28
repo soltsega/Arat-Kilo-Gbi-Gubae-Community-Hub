@@ -522,10 +522,21 @@ document.addEventListener('DOMContentLoaded', () => {
     // Acts Q&A Accordion Logic
     async function initActsQa() {
         const container = document.getElementById('actsQaContainer');
+        const card = document.querySelector('.acts-qa-card');
         if (!container) return;
 
+        // Make card clickable to scroll to section
+        if (card) {
+            card.style.cursor = 'pointer';
+            card.addEventListener('click', () => {
+                document.getElementById('actsQaSection').scrollIntoView({ behavior: 'smooth' });
+                hapticFeedback();
+            });
+        }
+
         try {
-            const response = await fetch('data/acts_qa.json');
+            // Add cache buster to fetch
+            const response = await fetch(`data/acts_qa.json?v=${new Date().getTime()}`);
             if (!response.ok) throw new Error('Q&A data not found');
             const data = await response.json();
             
