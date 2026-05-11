@@ -85,3 +85,5 @@ fvenv/
 data/raw/
 frontend/.gitignore
 docs/Acts_QA.txt
+data/processed/Gelatians-2ndTimothy_cleaned.txt
+data/processed/secondCorinth_cleaned.txt
