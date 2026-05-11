@@ -2,7 +2,14 @@ import os
 import shutil
 import sys
 import re
+import io
 from pathlib import Path
+
+# Set UTF-8 encoding for stdout and stderr to handle emojis and Ethiopian characters on Windows
+if sys.stdout.encoding != 'utf-8':
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+if sys.stderr.encoding != 'utf-8':
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
 
 def create_processed_folder():
     """Create the processed folder if it doesn't exist."""
