@@ -35,6 +35,7 @@ if not DATA_DIR:
 # Mapping of tab keys to CSV filenames
 LEADERBOARD_MAP = {
     "romans_corinthians_cumulative": "Romans_Corinthians_Cumulative.csv",
+    "galatians_philemon": "GalatiansPhilemon_Leaderboard.csv",
     "2corinthians": "SecondCorinthians_Leaderboard.csv",
     "1corinthians": "FirstCorintians_Leaderboard.csv",
     "romans": "Romans_Leaderboard.csv",
@@ -48,6 +49,7 @@ LEADERBOARD_MAP = {
 # Tab metadata for the frontend
 TABS = [
     {"key": "romans_corinthians_cumulative", "label": "ሮሜ - ፪ኛ ቆሮንቶስ", "icon": "Saint_Paul.png"},
+    {"key": "galatians_philemon", "label": "ከገላትያ - ፊልሞና", "icon": "Saint_Paul.png"},
     {"key": "2corinthians", "label": "፪ኛ ቆሮንቶስ", "icon": "Saint_Paul.png"},
     {"key": "1corinthians", "label": "፩ኛ ቆሮንቶስ", "icon": "Saint_Paul.png"},
     {"key": "romans", "label": "ወደ ሮሜ ሰዎች", "icon": "Saint_Paul.png"},

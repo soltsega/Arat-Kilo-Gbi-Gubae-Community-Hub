@@ -25,6 +25,7 @@ export default function ResultsPage() {
         // Fallback tabs if API fails
         setTabs([
           { key: 'romans_corinthians_cumulative', label: 'ሮሜ - ፪ኛ ቆሮንቶስ', icon: 'Saint_Paul.png' },
+          { key: 'galatians_philemon', label: 'ከገላትያ - ፊልሞና', icon: 'Saint_Paul.png' },
           { key: '2corinthians', label: '፪ኛ ቆሮንቶስ', icon: 'Saint_Paul.png' },
           { key: '1corinthians', label: '፩ኛ ቆሮንቶስ', icon: 'Saint_Paul.png' },
           { key: 'romans', label: 'ወደ ሮሜ ሰዎች', icon: 'Saint_Paul.png' },
