@@ -56,7 +56,10 @@ if os.path.exists(ASSETS_IMG_DIR):
 @app.on_event("startup")
 def on_startup():
     """Initialize database on startup."""
-    init_db()
+    try:
+        init_db()
+    except Exception as e:
+        print(f"Database initialization skipped or failed: {e}")
 
 
 @app.get("/api/health")

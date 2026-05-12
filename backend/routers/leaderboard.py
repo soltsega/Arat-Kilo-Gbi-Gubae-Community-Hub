@@ -9,20 +9,13 @@ import os
 router = APIRouter(prefix="/api/leaderboard", tags=["leaderboard"])
 
 # Path to data directory (relative to project root)
-# In Vercel, the whole project root is usually the base.
-# In local dev, we are in backend/routers/
-current_dir = os.path.dirname(os.path.abspath(__file__))
-# Try going up to find 'data' folder
-# Option 1: ../../data (if in backend/routers/)
-# Option 2: ../data (if in backend/)
-# Option 3: data (if in root)
-DATA_DIR = None
 search_paths = [
-    os.path.join(current_dir, "..", "..", "data", "processed"),
-    os.path.join(current_dir, "..", "data", "processed"),
-    os.path.join(current_dir, "data", "processed"),
+    os.path.join(os.getcwd(), "data", "processed"),
+    os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "data", "processed"),
+    os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "data", "processed"),
 ]
 
+DATA_DIR = None
 for path in search_paths:
     if os.path.exists(path):
         DATA_DIR = path
@@ -79,7 +72,7 @@ def get_leaderboard(book: str):
     csv_path = os.path.join(DATA_DIR, LEADERBOARD_MAP[book])
 
     if not os.path.exists(csv_path):
-        raise HTTPException(status_code=404, detail=f"CSV file not found: {LEADERBOARD_MAP[book]}")
+        raise HTTPException(status_code=404, detail=f"CSV file not found: {LEADERBOARD_MAP[book]} at {DATA_DIR}")
 
     try:
         df = pd.read_csv(csv_path)
