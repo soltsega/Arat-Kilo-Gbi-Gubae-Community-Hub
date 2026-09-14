@@ -32,6 +32,7 @@ export default function Navbar() {
     { path: '/links', label: 'Links' },
     { path: '/courses', label: 'Courses' },
     { path: '/bahre-hasab', label: 'ባህረ ሐሳብ' },
+    { path: '/bible-study', label: 'Bible Study' },
     { path: '/contact', label: 'Contact Us' },
   ];
 

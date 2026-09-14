@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: akgg-backend
+    volumes:
+      # Persist SQLite database and configurations
+      - ./backend:/app/backend
+      # Mount CSV data folder for leaderboards and dynamic assets
+      - ./data:/app/data
+      # Mount documentation or scripts if needed
+      - ./docs:/app/docs
+      - ./logs:/app/logs
+    environment:
+      - PYTHONPATH=/app
+      - LOG_LEVEL=INFO
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - DATABASE_URL=sqlite:////app/backend/database.db
+    restart: unless-stopped
+    healthcheck:
+      # Fast check on the API health endpoint
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    networks:
+      - community-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: akgg-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - community-network
+
+networks:
+  community-network:
+    driver: bridge

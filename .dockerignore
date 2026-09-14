@@ -1,0 +1,70 @@
+# Git
+.git
+.gitignore
+
+# Python
+**/__pycache__/
+**/*.py[cod]
+**/*$py.class
+**/*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+venv_new/
+fvenv/
+env/
+ENV/
+
+# Node.js
+node_modules/
+**/node_modules/
+frontend/dist/
+frontend/build/
+
+# IDE / Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Environment variables
+.env
+.env.local
+.env.production
+.env.development
+
+# Backup and temp files
+*.backup
+*.bak
+tmp/
+temp/
+
+# Documentation and meta
+DockerFiles/
+Documentation/
+README.md
+vercel.json
