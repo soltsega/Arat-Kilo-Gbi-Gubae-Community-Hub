@@ -47,6 +47,10 @@ export default function HomePage() {
             <h3>Courses</h3>
             <p>Coming Soon! certification programs and spiritual growth courses.</p>
           </Link>
+          <Link to="/bible-study" className="feature-card">
+            <h3>Bible Study</h3>
+            <p>Structured curriculum for Old Testament, New Testament, and Patristics.</p>
+          </Link>
           <Link to="/bahre-hasab" className="feature-card">
             <h3>ባህረ ሐሳብ</h3>
             <p>Calculate Ethiopian Orthodox movable holidays and fasts for any year.</p>

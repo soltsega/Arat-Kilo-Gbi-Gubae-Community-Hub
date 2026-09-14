@@ -15,6 +15,7 @@ import CoursesPage from './pages/CoursesPage';
 import BahreHasabPage from './pages/BahreHasabPage';
 import ContactPage from './pages/ContactPage';
 import AdminPage from './pages/AdminPage';
+import BibleStudyPage from './pages/BibleStudyPage';
 
 export default function App() {
   return (
@@ -31,6 +32,7 @@ export default function App() {
         <Route path="/bahre-hasab" element={<BahreHasabPage />} />
         <Route path="/contact" element={<ContactPage />} />
         <Route path="/admin" element={<AdminPage />} />
+        <Route path="/bible-study" element={<BibleStudyPage />} />
       </Routes>
       <Footer />
     </Router>
